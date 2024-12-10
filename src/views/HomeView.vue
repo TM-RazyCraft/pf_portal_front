@@ -4,8 +4,12 @@ import StartButton from '../components/StartButton.vue'
 import BackGround from '../components/BackGround.vue'
 
 const $startUpRef = ref(false)
+const $startUpShowRef = ref(true)
 const startUp = () => {
   $startUpRef.value = true
+  setTimeout(() => {
+    $startUpShowRef.value = false
+  }, 1000)
 }
 
 const reactiveStartUp = computed(() => {
@@ -16,9 +20,11 @@ const reactiveStartUp = computed(() => {
 <template>
   <main>
     <div class="frame">
-      <StartButton
-        @start-up="startUp"
-      />
+      <template v-if="$startUpShowRef">
+        <StartButton
+          @start-up="startUp"
+        />
+      </template>
       <BackGround
         :flag="reactiveStartUp"
       />

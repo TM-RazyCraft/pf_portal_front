@@ -1,9 +1,20 @@
 <script setup lang="ts">
+import { ref, defineEmits } from 'vue'
+
+const $fadeOutRef = ref(false)
 defineEmits(['start-up'])
+
+const fadeOut = () => {
+  $fadeOutRef.value = true
+}
 </script>
 
 <template>
-  <div class="starts" @click="$emit('start-up')">
+  <div
+    class="starts"
+    @click="$emit('start-up'); fadeOut()"
+    :class="{fadeOut: $fadeOutRef}"
+  >
     <div class="outline"></div>
     <div class="innerline">
       <span>START</span>
@@ -24,6 +35,19 @@ defineEmits(['start-up'])
   bottom: 0;
   margin: auto;
   z-index: 2;
+  &.fadeOut {
+    animation: fadeOut 1s ease 0s 1 forwards;
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(0, -100px);
+      }
+    }
+  }
   .outline {
     position: absolute;
     top: 0;
@@ -36,18 +60,6 @@ defineEmits(['start-up'])
     border: 16px solid #FFF;
     border-radius: 100%;
     box-sizing: content-box;
-    // animation: sway 2s linear 0s infinite;
-    // @keyframes sway {
-    //   0% {
-    //     border: 8px solid #FFF;
-    //   }
-    //   50% {
-    //     border: 16px solid #FFF;
-    //   }
-    //   100% {
-    //     border: 8px solid #FFF;
-    //   }
-    // }
   }
   .innerline {
     position: absolute;
