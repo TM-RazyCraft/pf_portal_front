@@ -1,0 +1,19 @@
+@use 'sass:math';
+
+$pi: 3.14159265359;
+$px-393-width: 393; // iPhone 15 Size
+$px-393: math.div($px-393-width, 100);
+
+$px-1920-width: 1920; // PC Size
+$px-1920: math.div($px-1920-width, 100); 
+
+@function psd($px) {
+  @if (media screen and (min-width:828px)) {
+    @return math.div($px * 1vw, $px-1920);
+  } @else {
+    @return math.div($px * 1vw, $px-393);
+  }
+}
+
+$large:  "(min-width:828px)";
+$small:  "(max-width:827px)";
