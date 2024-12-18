@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import StartButton from '../components/StartButton.vue'
 import BackGround from '../components/BackGround.vue'
-
+import DesktopView from './DesktopView.vue';
 const $startUpRef = ref(false)
 const $startUpShowRef = ref(true)
 const startUp = () => {
@@ -25,13 +25,18 @@ const reactiveStartUp = computed(() => {
           @start-up="startUp"
         />
       </template>
+      <template v-else="!$startUpShowRef">
+        <DesktopView />
+      </template>
       <BackGround
         :flag="reactiveStartUp"
       />
     </div>
   </main>
 </template>
-<style scoped>
+<style lang="scss" scoped>
+@use '@/styles/_variable.scss' as var;
+
 .frame {
   width: 100vw;
   height: 100vh;

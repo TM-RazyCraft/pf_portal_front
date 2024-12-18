@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
 
 const $fadeOutRef = ref(false)
-defineEmits(['start-up'])
-
 const fadeOut = () => {
   $fadeOutRef.value = true
 }
@@ -25,8 +23,8 @@ const fadeOut = () => {
 <style lang="scss" scoped>
 @use '@/styles/_variable.scss' as var;
 .starts {
-  width: var.psd(272);
-  height: var.psd(272);
+  width: var.psd(272px);
+  height: var.psd(272px);
   background: transparent;
   position: absolute;
   top: 0;
@@ -35,6 +33,11 @@ const fadeOut = () => {
   bottom: 0;
   margin: auto;
   z-index: 2;
+
+  @include var.small {
+    width: var.psd(216);
+    height: var.psd(216);
+  }
   &.fadeOut {
     animation: fadeOut 1s ease 0s 1 forwards;
     @keyframes fadeOut {
@@ -55,11 +58,15 @@ const fadeOut = () => {
     right: 0;
     bottom: 0;
     margin: auto;
-    width: var.psd(240);
-    height: var.psd(240);
+    width: var.psd(240px);
+    height: var.psd(240px);
     border: 16px solid #FFF;
     border-radius: 100%;
     box-sizing: content-box;
+    @include var.small {
+      width: var.psd(184);
+      height: var.psd(184);
+    }
   }
   .innerline {
     position: absolute;
@@ -76,6 +83,10 @@ const fadeOut = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    @include var.small {
+      width: var.psd(144);
+      height: var.psd(144);
+    }
     span {
       display: block;
       font-size: 40px;
@@ -83,6 +94,9 @@ const fadeOut = () => {
       line-height: 1;
       font-weight: 700;
       color: #FFF;
+      @include var.small {
+        font-size: var.psd(32);
+      }
     }
   }
   &:hover {

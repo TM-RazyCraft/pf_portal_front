@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:5.2.0"],\
           ["@vue/eslint-config-typescript", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:14.1.3"],\
           ["@vue/tsconfig", "npm:0.5.1"],\
+          ["dayjs", "npm:1.11.13"],\
           ["eslint", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:9.15.0"],\
           ["eslint-plugin-vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:9.31.0"],\
           ["normalize.css", "npm:8.0.1"],\
@@ -42,7 +43,8 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-vue-devtools", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:7.6.4"],\
           ["vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:3.5.13"],\
           ["vue-router", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:4.4.5"],\
-          ["vue-tsc", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:2.1.10"]\
+          ["vue-tsc", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:2.1.10"],\
+          ["vue3-draggable-resizable", "npm:1.6.5"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -2374,6 +2376,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["dayjs", [\
+      ["npm:1.11.13", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/dayjs-npm-1.11.13-d478bb9479-10c0.zip/node_modules/dayjs/",\
+        "packageDependencies": [\
+          ["dayjs", "npm:1.11.13"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["de-indent", [\
       ["npm:1.0.2", {\
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/de-indent-npm-1.0.2-66cccde30f-10c0.zip/node_modules/de-indent/",\
@@ -3998,6 +4009,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:5.2.0"],\
           ["@vue/eslint-config-typescript", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:14.1.3"],\
           ["@vue/tsconfig", "npm:0.5.1"],\
+          ["dayjs", "npm:1.11.13"],\
           ["eslint", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:9.15.0"],\
           ["eslint-plugin-vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:9.31.0"],\
           ["normalize.css", "npm:8.0.1"],\
@@ -4009,7 +4021,8 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-vue-devtools", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:7.6.4"],\
           ["vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:3.5.13"],\
           ["vue-router", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:4.4.5"],\
-          ["vue-tsc", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:2.1.10"]\
+          ["vue-tsc", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:2.1.10"],\
+          ["vue3-draggable-resizable", "npm:1.6.5"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -5005,6 +5018,15 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/typescript",\
           "typescript"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["vue3-draggable-resizable", [\
+      ["npm:1.6.5", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/vue3-draggable-resizable-npm-1.6.5-22ec244524-10c0.zip/node_modules/vue3-draggable-resizable/",\
+        "packageDependencies": [\
+          ["vue3-draggable-resizable", "npm:1.6.5"]\
         ],\
         "linkType": "HARD"\
       }]\

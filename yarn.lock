@@ -1770,6 +1770,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.13":
+  version: 1.11.13
+  resolution: "dayjs@npm:1.11.13"
+  checksum: a3caf6ac8363c7dade9d1ee797848ddcf25c1ace68d9fe8678ecf8ba0675825430de5d793672ec87b24a69bf04a1544b176547b2539982275d5542a7955f35b7
+  languageName: node
+  linkType: hard
+
 "de-indent@npm:^1.0.2":
   version: 1.0.2
   resolution: "de-indent@npm:1.0.2"
@@ -3250,6 +3257,7 @@ __metadata:
     "@vitejs/plugin-vue": "npm:^5.1.4"
     "@vue/eslint-config-typescript": "npm:^14.1.3"
     "@vue/tsconfig": "npm:^0.5.1"
+    dayjs: "npm:^1.11.13"
     eslint: "npm:^9.14.0"
     eslint-plugin-vue: "npm:^9.30.0"
     normalize.css: "npm:^8.0.1"
@@ -3262,6 +3270,7 @@ __metadata:
     vue: "npm:^3.5.12"
     vue-router: "npm:^4.4.5"
     vue-tsc: "npm:^2.1.10"
+    vue3-draggable-resizable: "npm:^1.6.5"
   languageName: unknown
   linkType: soft
 
@@ -4060,6 +4069,13 @@ __metadata:
   bin:
     vue-tsc: ./bin/vue-tsc.js
   checksum: 6367db8b36e59fcea432b1f9f53ac36f0389b26278cd8f1f7cc914a26ba82dda7db5a4407e8e159f33a9a788821f6e6f69037bc3db0f9f2be9fe700123032282
+  languageName: node
+  linkType: hard
+
+"vue3-draggable-resizable@npm:^1.6.5":
+  version: 1.6.5
+  resolution: "vue3-draggable-resizable@npm:1.6.5"
+  checksum: 6cfb3cc6f6d614b5777c43f3f9492afb78c435ec63f9341ff8fe4dbf727b120a562997207315febd7c7dbb7ddeb4656bf8ee055d0445d5e02021f993f0f2ef2b
   languageName: node
   linkType: hard
 
