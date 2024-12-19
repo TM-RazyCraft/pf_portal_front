@@ -46,6 +46,10 @@ onMounted(() => {
     }
 
   }
+  @include var.small {
+    margin-top: 24px;
+    padding-bottom: 18px;
+  }
   div {
     color: #FFF;
     font-weight: bold;
@@ -54,16 +58,25 @@ onMounted(() => {
   }
   .date {
     font-size: var.psd(40px);
+    @include var.small {
+      font-size: var.psd(16);
+    }
   }
   .time {
     font-size: var.psd(90px);
     display: flex;
     justify-content: center;
     align-items: center;
+    @include var.small {
+      font-size: var.psd(42);
+    }
     span {
       display: block;
       font-size: var.psd(90px);
       margin: 0 2px;
+      @include var.small {
+        font-size: var.psd(42);
+      }
     }
   }
 }

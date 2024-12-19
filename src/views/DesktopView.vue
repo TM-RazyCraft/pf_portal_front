@@ -1,15 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import DigitalClock from '@/components/DigitalClock.vue';
 import Window from '@/components/Window.vue';
-const aboutSetting = {
-  initX: 20,
-  initY: 20
-}
-const garellySetting = {
-  initX: 450,
-  initY: 360
-}
+
 </script>
 
 <template>
@@ -18,12 +11,13 @@ const garellySetting = {
       <DigitalClock />
     </div>
     <div class="right-column">
-      <Window :type="'about'" :setting="aboutSetting" />
-      <Window :type="'garelly'" :setting="garellySetting" />
+      <Window :type="'about'" />
+      <Window :type="'garelly'" />
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
+@use '@/styles/_variable.scss' as var;
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -36,8 +30,17 @@ const garellySetting = {
   bottom: 0;
   margin: auto;
   z-index: 2;
+  @include var.small {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
   .left-column {
     width: 20.9%;
+    @include var.small {
+      width: 100%;
+      box-sizing: border-box;
+    }
   }
   .right-column {
     width: 79.1%;
@@ -54,6 +57,14 @@ const garellySetting = {
       100% {
         opacity: 1;
       }
+    }
+    @include var.small {
+      width: 100vw;
+      height: 100vh;
+      border-left: none;
+      background: linear-gradient(180deg, rgba(#323858, 20%) 0%, rgba(#A6423F, 10%) 100%);
+      padding: 24px #{var.psd(16) 32px};
+      box-sizing: border-box;
     }
   }
 }

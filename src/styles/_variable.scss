@@ -12,7 +12,6 @@ $px-1920: math.div($px-1920-width, 100);
 * 数値のみの場合はvwに変換
 */
 @function psd($px) {
-  @debug #{$px};
   @if (meta.type-of($px) == 'number' and math.is-unitless($px)) {
     @return math.div($px * 1vw, $px-393);
   } @else {

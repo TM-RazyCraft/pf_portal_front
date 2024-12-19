@@ -1,22 +1,48 @@
 <script setup lang="ts">
 import { ref, watch, useTemplateRef } from 'vue'
+import { useElementVisibility } from '@vueuse/core'
 import backgroundImage from '@/assets/images/background.webp'
 import backgroundSPImage from '@/assets/images/background_sp.webp'
+import { useWindowSize  } from '@vueuse/core'
+
+const { width, height } = useWindowSize()
 const propsFlag = defineProps(['flag'])
+const flagRef = ref(propsFlag.value)
 const background = useTemplateRef('background')
+const backgroundSp = useTemplateRef('backgroundSp')
 const bgImage = useTemplateRef('bgImage')
-const bgImageSp = useTemplateRef('bgImageSp')
+const bgSpImage = useTemplateRef('bgSpImage')
+const bgImageVisibility = useElementVisibility(bgImage)
+const bgSpImageVisibility = useElementVisibility(bgSpImage)
+
+const isSP = ref(false)
+const breakPoint = 827
 
 watch(propsFlag, (newVal) => {
   if (newVal) {
-    console.log(bgImage.value);
-    console.log(bgImageSp.value);
-
-    background.value.style.transition = 'transform 0.5s ease 0.2s'
+    flagRef.value = newVal;
+    let showBgImage = bgImageVisibility.value ? bgImage : bgSpImage
+    let showBackground = bgImageVisibility.value ? background : backgroundSp
+    showBackground.value.style.transition = bgImageVisibility.value ? 'transform 0.5s ease 0.2s' : 'transform 1s ease 0.2s'
     const windowHeight = window.innerHeight
-    const imageHeight = bgImage.value.clientHeight
+    const imageHeight = showBgImage.value.clientHeight
     const diff = imageHeight - windowHeight
-    background.value.style.transform = `translateY(-${diff}px)`
+    showBackground.value.style.transform = `translateY(-${diff}px)`
+  }
+})
+
+watch(width, (newVal) => {
+  const screenWidth = width.value
+  isSP.value = screenWidth < breakPoint ? true : false
+
+  if (flagRef.value.flag) {
+    let showBgImage = isSP.value ? bgSpImage : bgImage
+    let showBackground = isSP.value ? backgroundSp : background
+    showBackground.value.style.transition = 'transform 0.5s ease 0.2s'
+    const windowHeight = window.innerHeight
+    const imageHeight = showBgImage.value.clientHeight
+    const diff = imageHeight - windowHeight
+    showBackground.value.style.transform = `translateY(-${diff}px)`
   }
 })
 </script>
@@ -36,8 +62,10 @@ watch(propsFlag, (newVal) => {
   width: 100%;
   height: 100%;
   position: relative;
+  min-width: 1080px;
   @include var.small {
     display: none;
+    min-width: auto;
   }
   img {
     display: block;

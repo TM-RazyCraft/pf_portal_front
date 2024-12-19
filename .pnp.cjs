@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:5.2.0"],\
           ["@vue/eslint-config-typescript", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:14.1.3"],\
           ["@vue/tsconfig", "npm:0.5.1"],\
+          ["@vueuse/core", "npm:12.0.0"],\
           ["dayjs", "npm:1.11.13"],\
           ["eslint", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:9.15.0"],\
           ["eslint-plugin-vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:9.31.0"],\
@@ -1403,6 +1404,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/web-bluetooth", [\
+      ["npm:0.0.20", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@types-web-bluetooth-npm-0.0.20-b0f3bdd4e5-10c0.zip/node_modules/@types/web-bluetooth/",\
+        "packageDependencies": [\
+          ["@types/web-bluetooth", "npm:0.0.20"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@typescript-eslint/eslint-plugin", [\
       ["npm:8.15.0", {\
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@typescript-eslint-eslint-plugin-npm-8.15.0-24f974ab4c-10c0.zip/node_modules/@typescript-eslint/eslint-plugin/",\
@@ -1997,6 +2007,21 @@ const RAW_RUNTIME_STATE =
           "vue"\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["virtual:4f1dff4d10f35d7a37999eb0e025c7a42f8d16b2aab8c17d61c2ddb5deaf58c08d32fedb413c4b2f29e8e1a8e4f5201545471641533c0aeea63a58b816909de5#npm:3.5.13", {\
+        "packageLocation": "./.yarn/__virtual__/@vue-server-renderer-virtual-fb24b1c5d7/3/AppData/Local/Yarn/Berry/cache/@vue-server-renderer-npm-3.5.13-d23f3ccee8-10c0.zip/node_modules/@vue/server-renderer/",\
+        "packageDependencies": [\
+          ["@vue/server-renderer", "virtual:4f1dff4d10f35d7a37999eb0e025c7a42f8d16b2aab8c17d61c2ddb5deaf58c08d32fedb413c4b2f29e8e1a8e4f5201545471641533c0aeea63a58b816909de5#npm:3.5.13"],\
+          ["@types/vue", null],\
+          ["@vue/compiler-ssr", "npm:3.5.13"],\
+          ["@vue/shared", "npm:3.5.13"],\
+          ["vue", "virtual:dcb8e9975bbfb9d70c1fb1dfeef2be646a36850f35acb9b4a823d680607005280517d77a3aaeee102ed158040ab42c74f19aa3eecd20990eca41d08c5f00bab1#npm:3.5.13"]\
+        ],\
+        "packagePeers": [\
+          "@types/vue",\
+          "vue"\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@vue/shared", [\
@@ -2013,6 +2038,38 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@vue-tsconfig-npm-0.5.1-c8660c0790-10c0.zip/node_modules/@vue/tsconfig/",\
         "packageDependencies": [\
           ["@vue/tsconfig", "npm:0.5.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@vueuse/core", [\
+      ["npm:12.0.0", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@vueuse-core-npm-12.0.0-f2b4ad9f0b-10c0.zip/node_modules/@vueuse/core/",\
+        "packageDependencies": [\
+          ["@vueuse/core", "npm:12.0.0"],\
+          ["@types/web-bluetooth", "npm:0.0.20"],\
+          ["@vueuse/metadata", "npm:12.0.0"],\
+          ["@vueuse/shared", "npm:12.0.0"],\
+          ["vue", "virtual:dcb8e9975bbfb9d70c1fb1dfeef2be646a36850f35acb9b4a823d680607005280517d77a3aaeee102ed158040ab42c74f19aa3eecd20990eca41d08c5f00bab1#npm:3.5.13"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@vueuse/metadata", [\
+      ["npm:12.0.0", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@vueuse-metadata-npm-12.0.0-8e9ddf7794-10c0.zip/node_modules/@vueuse/metadata/",\
+        "packageDependencies": [\
+          ["@vueuse/metadata", "npm:12.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@vueuse/shared", [\
+      ["npm:12.0.0", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@vueuse-shared-npm-12.0.0-dcb8e9975b-10c0.zip/node_modules/@vueuse/shared/",\
+        "packageDependencies": [\
+          ["@vueuse/shared", "npm:12.0.0"],\
+          ["vue", "virtual:dcb8e9975bbfb9d70c1fb1dfeef2be646a36850f35acb9b4a823d680607005280517d77a3aaeee102ed158040ab42c74f19aa3eecd20990eca41d08c5f00bab1#npm:3.5.13"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4009,6 +4066,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:5.2.0"],\
           ["@vue/eslint-config-typescript", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:14.1.3"],\
           ["@vue/tsconfig", "npm:0.5.1"],\
+          ["@vueuse/core", "npm:12.0.0"],\
           ["dayjs", "npm:1.11.13"],\
           ["eslint", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:9.15.0"],\
           ["eslint-plugin-vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:9.31.0"],\
@@ -4911,6 +4969,24 @@ const RAW_RUNTIME_STATE =
           ["@vue/server-renderer", "virtual:037a1909e5e2bf6bb7a6404107b79cf543d4dc0c42b168235005ce62a1ac6869fc5ad03fa9f5e105f80abadadb7e48e9c4ed399781388a2543b8d9add8813249#npm:3.5.13"],\
           ["@vue/shared", "npm:3.5.13"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=29ae49"]\
+        ],\
+        "packagePeers": [\
+          "@types/typescript",\
+          "typescript"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:dcb8e9975bbfb9d70c1fb1dfeef2be646a36850f35acb9b4a823d680607005280517d77a3aaeee102ed158040ab42c74f19aa3eecd20990eca41d08c5f00bab1#npm:3.5.13", {\
+        "packageLocation": "./.yarn/__virtual__/vue-virtual-4f1dff4d10/3/AppData/Local/Yarn/Berry/cache/vue-npm-3.5.13-59cb3fae80-10c0.zip/node_modules/vue/",\
+        "packageDependencies": [\
+          ["vue", "virtual:dcb8e9975bbfb9d70c1fb1dfeef2be646a36850f35acb9b4a823d680607005280517d77a3aaeee102ed158040ab42c74f19aa3eecd20990eca41d08c5f00bab1#npm:3.5.13"],\
+          ["@types/typescript", null],\
+          ["@vue/compiler-dom", "npm:3.5.13"],\
+          ["@vue/compiler-sfc", "npm:3.5.13"],\
+          ["@vue/runtime-dom", "npm:3.5.13"],\
+          ["@vue/server-renderer", "virtual:4f1dff4d10f35d7a37999eb0e025c7a42f8d16b2aab8c17d61c2ddb5deaf58c08d32fedb413c4b2f29e8e1a8e4f5201545471641533c0aeea63a58b816909de5#npm:3.5.13"],\
+          ["@vue/shared", "npm:3.5.13"],\
+          ["typescript", null]\
         ],\
         "packagePeers": [\
           "@types/typescript",\
