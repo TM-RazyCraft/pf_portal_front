@@ -2,25 +2,34 @@
 import { defineComponent, ref, onMounted, watch } from 'vue'
 import Vue3DraggableResizable from 'vue3-draggable-resizable'
 import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
-import { useWindowSize  } from '@vueuse/core'
+import { useWindowSize } from '@vueuse/core'
 const { width, height } = useWindowSize()
+
 defineComponent({
   components: {
     Vue3DraggableResizable
   }
 })
+
+const emit = defineEmits(['emitSelectWindow', 'emitShowFullScreen'])
+
 const props = defineProps({
   type: String,
+  select: Boolean
 })
 
-const x = ref(0)
-const y = ref(0)
-const w = ref(0)
-const h = ref(0)
+const windowX = ref(0)
+const windowY = ref(0)
+const windowW = ref(0)
+const windowH = ref(0)
 const active = ref(false)
+const parent = ref(true)
 const isSP = ref(false)
 const draggable = ref(true)
+const resizable = ref(true)
 const breakPoint = 827
+const fullScreenFlag = ref(false)
+
 
 watch(width, (newVal) => {
   const screenWidth = width.value
@@ -37,27 +46,36 @@ onMounted(() => {
 })
 
 const setDraggablSetting = (type: string) => {
-
   switch (type) {
     case 'about':
-      x.value = 20
-      y.value = 20
-      w.value = 400
-      h.value = 300
+      windowX.value = 39
+      windowY.value = 47
+      windowW.value = 933
+      windowH.value = 536
       break
     case 'garelly':
-      x.value = 500
-      y.value = 500
-      w.value = 400
-      h.value = 300
+      windowX.value = 643
+      windowY.value = 390
+      windowW.value = 760
+      windowH.value = 434
       break
   }
+}
+
+const fullScreen = () => {
+  fullScreenFlag.value = !fullScreenFlag.value
+  emit('emitShowFullScreen', fullScreenFlag.value)
+}
+
+const onDragStartCallback = (callbackX, callbackY) => {
+  fullScreenFlag.value = false
+  emit('emitSelectWindow', props.type)
 }
 </script>
 
 <template>
   <template v-if="isSP">
-    <div class="window" :class="{'active': props.type === 'about'}">
+    <div class="window" :class="{'active': props.select, 'full-screen': fullScreenFlag }">
       <div class="window-contents">
         <template v-if="props.type === 'about'">
           <h1>about</h1>
@@ -80,15 +98,17 @@ const setDraggablSetting = (type: string) => {
     <Vue3DraggableResizable
       :initW="400"
       :initH="300"
-      v-model:w="w"
-      v-model:h="h"
-      v-model:x="x"
-      v-model:y="y"
+      v-model:w="windowW"
+      v-model:h="windowH"
+      v-model:x="windowX"
+      v-model:y="windowY"
       v-model:active="active"
-      :parent="true"
-      :draggable="true"
-      :resizable="true"
+      :parent="parent"
+      :draggable="draggable"
+      :resizable="resizable"
       class="window"
+      :class="{'focus': props.select, 'full-screen': fullScreenFlag}"
+      :onDragStart="onDragStartCallback"
     >
       <div class="window-contents">
         <template v-if="props.type === 'about'">
@@ -99,7 +119,7 @@ const setDraggablSetting = (type: string) => {
           <h1>gallery</h1>
         </template>
       </div>
-      <div class="window-footer">
+      <div class="window-footer" @click="fullScreen()">
         <span>view more</span>
       </div>
     </Vue3DraggableResizable>
@@ -122,9 +142,11 @@ const setDraggablSetting = (type: string) => {
     position: relative;
   }
   &:not(:first-of-type) {
-    margin-top: 24px;
+    @include var.small {
+      margin-top: 24px;
+    }
   }
-  &.active {
+  &.focus {
     border-color: transparent;
     border-style: none;
     &:global(.handle) {
@@ -134,6 +156,29 @@ const setDraggablSetting = (type: string) => {
     }
     z-index: 99;
     background: linear-gradient(135deg, rgba(#000000, 80%) 0%, rgba(#000000, 50%) 100%);
+  }
+  &.full-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: -#{calc(100vw * 0.209)} !important;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: linear-gradient(135deg, rgba(#FFFFFF, 0.5) 0%, rgba(#FFFFFF, 0.1) 100%) border-box border-box;
+    box-shadow: 0 2px 15px 0 rgba(#FFFFFF, 10%);
+    z-index: 99;
+    transition: all 0.1s ease 0.1s;
+    &:before {
+      backdrop-filter: blur(30px);
+    }
+    .window-contents {
+      padding: 32px;
+      @include var.small {
+        padding: 16px var.psd(16) calc(24px + 32px);
+      }
+    }
   }
   &:before {
     content: "";

@@ -3,6 +3,11 @@ import { ref, computed, watch, onMounted } from 'vue'
 import DigitalClock from '@/components/DigitalClock.vue';
 import Window from '@/components/Window.vue';
 
+const selectWindow = ref('about')
+const fullScreenFlag = ref(false)
+const focus = (type: string) => {
+  selectWindow.value = type
+}
 </script>
 
 <template>
@@ -11,9 +16,22 @@ import Window from '@/components/Window.vue';
       <DigitalClock />
     </div>
     <div class="right-column">
-      <Window :type="'about'" />
-      <Window :type="'garelly'" />
+      <Window
+        :type="'about'"
+        :select="selectWindow === 'about'"
+        @click="focus('about')"
+        @emitSelectWindow="($event: any) => selectWindow = $event"
+        @emitShowFullScreen="($event: any) => fullScreenFlag = $event"
+      />
+      <Window
+        :type="'garelly'"
+        :select="selectWindow === 'garelly'"
+        @click="focus('garelly')"
+        @emitSelectWindow="($event: any) => selectWindow = $event"
+        @emitShowFullScreen="($event: any) => fullScreenFlag = $event"
+      />
     </div>
+    <div class="blur-filter" :class="{'show': fullScreenFlag}"></div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -65,6 +83,18 @@ import Window from '@/components/Window.vue';
       background: linear-gradient(180deg, rgba(#323858, 20%) 0%, rgba(#A6423F, 10%) 100%);
       padding: 24px #{var.psd(16) 32px};
       box-sizing: border-box;
+    }
+  }
+  .blur-filter {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    backdrop-filter: blur(30px);
+    z-index: 1;
+    &.show {
+      display: block;
     }
   }
 }
