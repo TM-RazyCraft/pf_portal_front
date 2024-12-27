@@ -2,11 +2,28 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import DigitalClock from '@/components/DigitalClock.vue';
 import Window from '@/components/Window.vue';
-
+import AboutTemplate from '@/components/window/AboutTemplate.vue';
+import AboutDetailTemplate from '@/components/window/AboutDetailTemplate.vue';
+import GarellyTemplate from '@/components/window/GarellyTemplate.vue';
+import GarellyDetailTemplate from '@/components/window/GarellyDetailTemplate.vue';
 const selectWindow = ref('about')
-const fullScreenFlag = ref(false)
+const selectDetailTemplate = ref(AboutDetailTemplate)
+const parentFullScreenFlag = ref(false)
+watch(selectWindow, (newVal) => {
+  if (newVal === 'about') {
+    selectDetailTemplate.value = AboutDetailTemplate
+  } else if (newVal === 'garelly') {
+    selectDetailTemplate.value = GarellyDetailTemplate
+  }
+})
+
+
 const focus = (type: string) => {
   selectWindow.value = type
+}
+
+const closeFullScreen = () => {
+  parentFullScreenFlag.value = false
 }
 </script>
 
@@ -19,19 +36,33 @@ const focus = (type: string) => {
       <Window
         :type="'about'"
         :select="selectWindow === 'about'"
+        :fullScreen="parentFullScreenFlag"
         @click="focus('about')"
         @emitSelectWindow="($event: any) => selectWindow = $event"
-        @emitShowFullScreen="($event: any) => fullScreenFlag = $event"
-      />
+        @emitShowFullScreen="($event: any) => parentFullScreenFlag = $event"
+      >
+        <AboutTemplate />
+      </Window>
       <Window
         :type="'garelly'"
         :select="selectWindow === 'garelly'"
+        :fullScreen="parentFullScreenFlag"
         @click="focus('garelly')"
         @emitSelectWindow="($event: any) => selectWindow = $event"
-        @emitShowFullScreen="($event: any) => fullScreenFlag = $event"
-      />
+        @emitShowFullScreen="($event: any) => parentFullScreenFlag = $event"
+      >
+        <GarellyTemplate />
+      </Window>
     </div>
-    <div class="blur-filter" :class="{'show': fullScreenFlag}"></div>
+    <div class="fullscreen-contents" v-if="parentFullScreenFlag">
+      <div class="detail">
+        <component :is="selectDetailTemplate" />
+        <div class="close" @click="closeFullScreen()">
+          <img src="@/assets/images/parts/closeButton.svg" alt="閉じる">
+        </div>
+      </div>
+    </div>
+    <div class="blur-filter" :class="{'show': parentFullScreenFlag}"></div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -88,13 +119,51 @@ const focus = (type: string) => {
   .blur-filter {
     display: none;
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    width: 0;
+    height: 0;
     background: transparent;
-    backdrop-filter: blur(30px);
+    backdrop-filter: blur(10px);
     z-index: 1;
+    transition: all 0.2s linear 0.2s;
+    pointer-events: none;
     &.show {
       display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+  .fullscreen-contents {
+    position: absolute;
+    z-index: 2;
+    margin-left: 20.9%;
+    padding-top: 80px;
+    .detail {
+      opacity: 0;
+      animation: fadeIn 0.2s ease 0.2s 1 forwards;
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .close {
+    position: absolute;
+    top: 16px;
+    right: var.psd(32px);
+    width: var.psd(40px);
+    height: var.psd(40px);
+    &:hover {
+      cursor: pointer;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
   }
 }

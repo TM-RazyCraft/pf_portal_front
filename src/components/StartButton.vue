@@ -10,7 +10,7 @@ const fadeOut = () => {
 <template>
   <div
     class="starts"
-    @click="$emit('start-up'); fadeOut()"
+    @click.passive="$emit('start-up'); fadeOut()"
     :class="{fadeOut: $fadeOutRef}"
   >
     <div class="outline"></div>

@@ -35,7 +35,7 @@ watch(width, (newVal) => {
   const screenWidth = width.value
   isSP.value = screenWidth < breakPoint ? true : false
 
-  if (flagRef.value.flag) {
+  if (flagRef.value?.flag) {
     let showBgImage = isSP.value ? bgSpImage : bgImage
     let showBackground = isSP.value ? backgroundSp : background
     showBackground.value.style.transition = 'transform 0.5s ease 0.2s'

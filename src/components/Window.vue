@@ -15,8 +15,11 @@ const emit = defineEmits(['emitSelectWindow', 'emitShowFullScreen'])
 
 const props = defineProps({
   type: String,
-  select: Boolean
+  select: Boolean,
+  fullScreen: Boolean
 })
+console.log(props);
+
 
 const windowX = ref(0)
 const windowY = ref(0)
@@ -38,6 +41,11 @@ watch(width, (newVal) => {
 watch(isSP, (newVal) => {
   setDraggablSetting(props.type)
 })
+// watch(() => props.fullScreen, (newVal) => {
+//   fullScreenFlag.value = newVal
+//   console.log(fullScreenFlag.value);
+
+// })
 
 onMounted(() => {
   setDraggablSetting(props.type)
@@ -63,13 +71,14 @@ const setDraggablSetting = (type: string) => {
 }
 
 const fullScreen = () => {
-  fullScreenFlag.value = !fullScreenFlag.value
-  emit('emitShowFullScreen', fullScreenFlag.value)
+  fullScreenFlag.value = true
+  emit('emitShowFullScreen', true)
 }
 
 const onDragStartCallback = (callbackX, callbackY) => {
   fullScreenFlag.value = false
   emit('emitSelectWindow', props.type)
+  emit('emitShowFullScreen', false)
 }
 </script>
 
@@ -89,7 +98,7 @@ const onDragStartCallback = (callbackX, callbackY) => {
           <h1>gallery</h1>
         </template>
       </div>
-      <div class="window-footer">
+      <div class="window-footer" @click="fullScreen()">
         <span>view more</span>
       </div>
     </div>
@@ -111,13 +120,7 @@ const onDragStartCallback = (callbackX, callbackY) => {
       :onDragStart="onDragStartCallback"
     >
       <div class="window-contents">
-        <template v-if="props.type === 'about'">
-          <h1>about</h1>
-          <p>test</p>
-        </template>
-        <template v-else-if="props.type === 'garelly'">
-          <h1>gallery</h1>
-        </template>
+        <slot></slot>
       </div>
       <div class="window-footer" @click="fullScreen()">
         <span>view more</span>
@@ -136,10 +139,12 @@ const onDragStartCallback = (callbackX, callbackY) => {
   height: 300px;
   box-shadow: 0 2px 15px 0 rgba(#FFFFFF, 10%);
   background: linear-gradient(135deg, rgba(#FFFFFF, 20%) 0%, rgba(#FFFFFF, 10%) 100%);
+  opacity: 0.5;
   @include var.small {
     width: 100%;
     height: auto;
     position: relative;
+    opacity: 1;
   }
   &:not(:first-of-type) {
     @include var.small {
@@ -149,13 +154,16 @@ const onDragStartCallback = (callbackX, callbackY) => {
   &.focus {
     border-color: transparent;
     border-style: none;
+    opacity: 1;
     &:global(.handle) {
       opacity: 0;
       width: 20px;
       height: 20px;
     }
     z-index: 99;
-    background: linear-gradient(135deg, rgba(#000000, 80%) 0%, rgba(#000000, 50%) 100%);
+    .window-footer {
+      pointer-events: auto;
+    }
   }
   &.full-screen {
     width: 100vw !important;
@@ -166,18 +174,21 @@ const onDragStartCallback = (callbackX, callbackY) => {
     bottom: 0;
     border-radius: 0;
     box-shadow: none;
-    background: linear-gradient(135deg, rgba(#FFFFFF, 0.5) 0%, rgba(#FFFFFF, 0.1) 100%) border-box border-box;
-    box-shadow: 0 2px 15px 0 rgba(#FFFFFF, 10%);
+    background: linear-gradient(135deg, rgba(#323858, 20%) 0%, rgba(#A6423F, 10%) 100%);
+    box-shadow: none;
     z-index: 99;
     transition: all 0.1s ease 0.1s;
-    &:before {
-      backdrop-filter: blur(30px);
-    }
     .window-contents {
-      padding: 32px;
-      @include var.small {
-        padding: 16px var.psd(16) calc(24px + 32px);
-      }
+      opacity: 0;
+      transition: all 0.2s ease 0s;
+    }
+    &:before {
+      display: none;
+    }
+    .window-footer {
+      opacity: 0;
+      transition: all 0.2s ease 0s;
+      pointer-events: none;
     }
   }
   &:before {
@@ -197,6 +208,7 @@ const onDragStartCallback = (callbackX, callbackY) => {
   }
   .window-contents {
     padding: 32px;
+    opacity: 1;
     @include var.small {
       padding: 16px var.psd(16) calc(24px + 32px);
     }
@@ -237,11 +249,13 @@ const onDragStartCallback = (callbackX, callbackY) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    &:hover {
-      cursor: pointer;
-    }
+    pointer-events: none;
     @include var.small {
       height: 32px;
+      pointer-events: auto;
+    }
+    &:hover {
+      cursor: pointer;
     }
     span {
       display: block;
