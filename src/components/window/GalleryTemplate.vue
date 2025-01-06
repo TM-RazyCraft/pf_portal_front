@@ -4,6 +4,14 @@ import { ref } from 'vue'
 
 <template>
   <h1>gallery</h1>
+  <ul class="thumbs">
+    <li>
+      <img src="@/assets/images/gallery/sample_gray.png" alt="image1">
+    </li>
+    <li>
+      <img src="@/assets/images/gallery/sample_gray.png" alt="image1">
+    </li>
+  </ul>
 </template>
 
 <style lang="scss" scoped>
@@ -28,6 +36,25 @@ p {
   word-break: break-all;
   @include var.small {
     font-size: var.psd(16px);
+  }
+}
+.thumbs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  li {
+    width: var.psd(381px);
+    margin-right: 16px;
+    list-style: none;
+    &:last-child {
+      margin-right: 0;
+    }
+    img {
+      width: 100%;
+      display: block;
+    }
   }
 }
 </style>

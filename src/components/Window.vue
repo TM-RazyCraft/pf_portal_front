@@ -20,7 +20,6 @@ const props = defineProps({
 })
 console.log(props);
 
-
 const windowX = ref(0)
 const windowY = ref(0)
 const windowW = ref(0)
@@ -41,11 +40,9 @@ watch(width, (newVal) => {
 watch(isSP, (newVal) => {
   setDraggablSetting(props.type)
 })
-// watch(() => props.fullScreen, (newVal) => {
-//   fullScreenFlag.value = newVal
-//   console.log(fullScreenFlag.value);
-
-// })
+watch(() => props.fullScreen, (newVal) => {
+  fullScreenFlag.value = newVal
+})
 
 onMounted(() => {
   setDraggablSetting(props.type)
@@ -61,7 +58,7 @@ const setDraggablSetting = (type: string) => {
       windowW.value = 933
       windowH.value = 536
       break
-    case 'garelly':
+    case 'gallery':
       windowX.value = 643
       windowY.value = 390
       windowW.value = 760
@@ -70,9 +67,13 @@ const setDraggablSetting = (type: string) => {
   }
 }
 
-const fullScreen = () => {
-  fullScreenFlag.value = true
-  emit('emitShowFullScreen', true)
+const fullScreen = (flag: boolean) => {
+  fullScreenFlag.value = flag
+  console.log(props.type);
+  console.log(props.select);
+
+
+  emit('emitShowFullScreen', flag)
 }
 
 const onDragStartCallback = (callbackX, callbackY) => {
@@ -84,21 +85,11 @@ const onDragStartCallback = (callbackX, callbackY) => {
 
 <template>
   <template v-if="isSP">
-    <div class="window" :class="{'active': props.select, 'full-screen': fullScreenFlag }">
+    <div class="window" :class="{'active': props.select, 'full-screen': fullScreenFlag && props.select}"> }">
       <div class="window-contents">
-        <template v-if="props.type === 'about'">
-          <h1>about</h1>
-          <p>
-            テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-            テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-            テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-          </p>
-        </template>
-        <template v-else-if="props.type === 'garelly'">
-          <h1>gallery</h1>
-        </template>
+        <slot></slot>
       </div>
-      <div class="window-footer" @click="fullScreen()">
+      <div class="window-footer" @click="fullScreen(true)">
         <span>view more</span>
       </div>
     </div>
@@ -116,13 +107,13 @@ const onDragStartCallback = (callbackX, callbackY) => {
       :draggable="draggable"
       :resizable="resizable"
       class="window"
-      :class="{'focus': props.select, 'full-screen': fullScreenFlag}"
+      :class="{'focus': props.select, 'full-screen': fullScreenFlag && props.select}"
       :onDragStart="onDragStartCallback"
     >
       <div class="window-contents">
         <slot></slot>
       </div>
-      <div class="window-footer" @click="fullScreen()">
+      <div class="window-footer" @click="fullScreen(true)">
         <span>view more</span>
       </div>
     </Vue3DraggableResizable>
@@ -212,28 +203,6 @@ const onDragStartCallback = (callbackX, callbackY) => {
     @include var.small {
       padding: 16px var.psd(16) calc(24px + 32px);
     }
-    h1 {
-      font-size: var.psd(40px);
-      font-weight: 700;
-      line-height: 1.2;
-      color: #FFFFFF;
-      margin: 0 0 32px 0;
-      @include var.small {
-        font-size: var.psd(24px);
-        margin: 0 0 16px 0;
-      }
-    }
-    p {
-      font-size: var.psd(24px);
-      font-weight: 400;
-      line-height: 1.2;
-      color: #FFFFFF;
-      word-break: break-all;
-      @include var.small {
-        font-size: var.psd(16px);
-      }
-    }
-
   }
   .window-footer {
     position: absolute;

@@ -45,7 +45,8 @@ const RAW_RUNTIME_STATE =
           ["vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:3.5.13"],\
           ["vue-router", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:4.4.5"],\
           ["vue-tsc", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:2.1.10"],\
-          ["vue3-draggable-resizable", "npm:1.6.5"]\
+          ["vue3-draggable-resizable", "npm:1.6.5"],\
+          ["vue3-smooth-scroll", "npm:0.8.1"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -4080,7 +4081,8 @@ const RAW_RUNTIME_STATE =
           ["vue", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:3.5.13"],\
           ["vue-router", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:4.4.5"],\
           ["vue-tsc", "virtual:9b773aeb5b2767be53b039457d10c386bec751254ca6278e1c267a8119997d4aff338286b97c10ddc94d28587edfb475171e5054fc6f85168c00ca1d502228ec#npm:2.1.10"],\
-          ["vue3-draggable-resizable", "npm:1.6.5"]\
+          ["vue3-draggable-resizable", "npm:1.6.5"],\
+          ["vue3-smooth-scroll", "npm:0.8.1"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -5103,6 +5105,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/vue3-draggable-resizable-npm-1.6.5-22ec244524-10c0.zip/node_modules/vue3-draggable-resizable/",\
         "packageDependencies": [\
           ["vue3-draggable-resizable", "npm:1.6.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["vue3-smooth-scroll", [\
+      ["npm:0.8.1", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/vue3-smooth-scroll-npm-0.8.1-9005fcb2ac-10c0.zip/node_modules/vue3-smooth-scroll/",\
+        "packageDependencies": [\
+          ["vue3-smooth-scroll", "npm:0.8.1"]\
         ],\
         "linkType": "HARD"\
       }]\

@@ -4,19 +4,19 @@ import DigitalClock from '@/components/DigitalClock.vue';
 import Window from '@/components/Window.vue';
 import AboutTemplate from '@/components/window/AboutTemplate.vue';
 import AboutDetailTemplate from '@/components/window/AboutDetailTemplate.vue';
-import GarellyTemplate from '@/components/window/GarellyTemplate.vue';
-import GarellyDetailTemplate from '@/components/window/GarellyDetailTemplate.vue';
+import GalleryTemplate from '@/components/window/GalleryTemplate.vue';
+import GalleryDetailTemplate from '@/components/window/GalleryDetailTemplate.vue';
 const selectWindow = ref('about')
+const windowNames = ref(['about', 'gallery'])
 const selectDetailTemplate = ref(AboutDetailTemplate)
 const parentFullScreenFlag = ref(false)
 watch(selectWindow, (newVal) => {
   if (newVal === 'about') {
     selectDetailTemplate.value = AboutDetailTemplate
-  } else if (newVal === 'garelly') {
-    selectDetailTemplate.value = GarellyDetailTemplate
+  } else if (newVal === 'gallery') {
+    selectDetailTemplate.value = GalleryDetailTemplate
   }
 })
-
 
 const focus = (type: string) => {
   selectWindow.value = type
@@ -25,6 +25,13 @@ const focus = (type: string) => {
 const closeFullScreen = () => {
   parentFullScreenFlag.value = false
 }
+const selectTemplate = ((name) => {
+  if (name === 'about') {
+    return AboutTemplate
+  } else if (name === 'gallery') {
+    return GalleryTemplate
+  }
+})
 </script>
 
 <template>
@@ -33,28 +40,20 @@ const closeFullScreen = () => {
       <DigitalClock />
     </div>
     <div class="right-column">
-      <Window
-        :type="'about'"
-        :select="selectWindow === 'about'"
-        :fullScreen="parentFullScreenFlag"
-        @click="focus('about')"
-        @emitSelectWindow="($event: any) => selectWindow = $event"
-        @emitShowFullScreen="($event: any) => parentFullScreenFlag = $event"
-      >
-        <AboutTemplate />
-      </Window>
-      <Window
-        :type="'garelly'"
-        :select="selectWindow === 'garelly'"
-        :fullScreen="parentFullScreenFlag"
-        @click="focus('garelly')"
-        @emitSelectWindow="($event: any) => selectWindow = $event"
-        @emitShowFullScreen="($event: any) => parentFullScreenFlag = $event"
-      >
-        <GarellyTemplate />
-      </Window>
+      <template v-for="name in windowNames">
+        <Window
+          :type="name"
+          :select="selectWindow === name"
+          :fullScreen="parentFullScreenFlag"
+          @click="focus(name)"
+          @emitSelectWindow="($event: any) => selectWindow = $event"
+          @emitShowFullScreen="($event: any) => parentFullScreenFlag = $event"
+        >
+          <component :is="selectTemplate(name)" />
+        </Window>
+      </template>
     </div>
-    <div class="fullscreen-contents" v-if="parentFullScreenFlag">
+    <div class="fullscreen-contents" :class="{'nopadding': selectWindow === 'gallery'}" v-if="parentFullScreenFlag">
       <div class="detail">
         <component :is="selectDetailTemplate" />
         <div class="close" @click="closeFullScreen()">
@@ -135,8 +134,12 @@ const closeFullScreen = () => {
   .fullscreen-contents {
     position: absolute;
     z-index: 2;
-    margin-left: 20.9%;
+    padding-left: 20.9%;
     padding-top: 80px;
+    width: calc(100vw - 20.9%);
+    &.nopadding {
+      padding-top: 0;
+    }
     .detail {
       opacity: 0;
       animation: fadeIn 0.2s ease 0.2s 1 forwards;
