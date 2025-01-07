@@ -85,7 +85,7 @@ const onDragStartCallback = (callbackX, callbackY) => {
 
 <template>
   <template v-if="isSP">
-    <div class="window" :class="{'active': props.select, 'full-screen': fullScreenFlag && props.select}"> }">
+    <div class="window" :class="{'active': props.select, 'full-screen': fullScreenFlag && props.select}">
       <div class="window-contents">
         <slot></slot>
       </div>

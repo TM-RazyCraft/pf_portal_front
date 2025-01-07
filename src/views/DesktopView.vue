@@ -134,11 +134,18 @@ const selectTemplate = ((name) => {
   .fullscreen-contents {
     position: absolute;
     z-index: 2;
-    padding-left: 20.9%;
-    padding-top: 80px;
+    padding: 80px 0 0 20.9%;
     width: calc(100vw - 20.9%);
+    @include var.small {
+      padding: 48px 0 32px;
+      width: 100vw;
+      box-sizing: border-box;
+    }
     &.nopadding {
-      padding-top: 0;
+      padding: 0 0 0 20.9%;
+      @include var.small {
+        padding: 48px 0 32px;
+      }
     }
     .detail {
       opacity: 0;
@@ -159,6 +166,13 @@ const selectTemplate = ((name) => {
     right: var.psd(32px);
     width: var.psd(40px);
     height: var.psd(40px);
+    z-index: 2;
+    @include var.small {
+      top: 8px;
+      right: var.psd(8);
+      width: var.psd(32);
+      height: var.psd(32);
+    }
     &:hover {
       cursor: pointer;
     }

@@ -3307,7 +3307,6 @@ __metadata:
     vue-router: "npm:^4.4.5"
     vue-tsc: "npm:^2.1.10"
     vue3-draggable-resizable: "npm:^1.6.5"
-    vue3-smooth-scroll: "npm:^0.8.1"
   languageName: unknown
   linkType: soft
 
@@ -4113,13 +4112,6 @@ __metadata:
   version: 1.6.5
   resolution: "vue3-draggable-resizable@npm:1.6.5"
   checksum: 6cfb3cc6f6d614b5777c43f3f9492afb78c435ec63f9341ff8fe4dbf727b120a562997207315febd7c7dbb7ddeb4656bf8ee055d0445d5e02021f993f0f2ef2b
-  languageName: node
-  linkType: hard
-
-"vue3-smooth-scroll@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "vue3-smooth-scroll@npm:0.8.1"
-  checksum: 1764429754e547927e2fb52b0e8883474fbb5bd6facc4e96b451ca94dda9bebe67567f9124f57d2d9b7596ab4c382fe6246aafb13b941d225deefd232a6e91b8
   languageName: node
   linkType: hard
 

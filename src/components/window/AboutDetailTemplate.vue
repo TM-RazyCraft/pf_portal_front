@@ -39,7 +39,7 @@ import { ref } from 'vue'
 .inner {
   height: calc(100vh - 80px);
   overflow: scroll;
-  padding-bottom: 64px;
+  padding: 0 0 64px;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -48,6 +48,9 @@ import { ref } from 'vue'
       padding-bottom: 64px;
     }
   }
+  @include var.small {
+    padding: 0 var.psd(16) 64px;
+  }
 }
 h1 {
   font-size: var.psd(40px);
@@ -55,11 +58,9 @@ h1 {
   line-height: 1.2;
   color: #FFFFFF;
   margin: 0 0 32px 0;
-  position: sticky;
-  top: -40px;
   z-index: 1;
   @include var.small {
-    font-size: var.psd(24px);
+    font-size: var.psd(24);
     margin: 0 0 16px 0;
   }
 }
@@ -71,7 +72,7 @@ p {
   word-break: break-all;
   margin: 0 0 24px 0;
   @include var.small {
-    font-size: var.psd(16px);
+    font-size: var.psd(24);
   }
 }
 .white-glass-board {
@@ -110,12 +111,23 @@ p {
     align-items: flex-start;
     margin: 0;
     padding: 0;
+    @include var.small {
+      flex-direction: column;
+    }
     li {
       list-style: none;
       width: var.psd(401px);
       margin-left: var.psd(32px);
       &:first-of-type {
         margin-left: 0;
+        @include var.small {
+          margin-top: 0;
+        }
+      }
+      @include var.small {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 16px;
       }
       img {
         width: 100%;
@@ -127,5 +139,8 @@ p {
 hr {
   width: 100%;
   margin: 48px 0;
+  @include var.small {
+    margin: 24px 0;
+  }
 }
 </style>
