@@ -15,7 +15,7 @@ $px-1920: math.div($px-1920-width, 100);
   @if (meta.type-of($px) == 'number' and math.is-unitless($px)) {
     @return math.div($px * 1vw, $px-393);
   } @else {
-    @return $px
+    @return $px;
   }
 }
 
