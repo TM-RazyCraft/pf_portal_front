@@ -31,7 +31,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 @use '@/styles/_variable.scss' as var;
 .clock {
-  margin-top: 80px;
+  margin-top: 32px;
   transform: translateY(20px);
   animation: slideFadeIn 0.3s ease 0.5s 1 forwards;
   opacity: 0;
@@ -57,13 +57,13 @@ onMounted(() => {
     line-height: 1;
   }
   .date {
-    font-size: var.psd(40px);
+    font-size: var.psd(26px);
     @include var.small {
       font-size: var.psd(16);
     }
   }
   .time {
-    font-size: var.psd(90px);
+    font-size: var.psd(56px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,10 +72,13 @@ onMounted(() => {
     }
     span {
       display: block;
-      font-size: var.psd(90px);
+      font-size: var.psd(56px);
       margin: 0 2px;
+      position: relative;
+      top: -4px;
       @include var.small {
         font-size: var.psd(42);
+        top: 0;
       }
     }
   }

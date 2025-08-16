@@ -7,7 +7,7 @@ import { useWindowSize  } from '@vueuse/core'
 
 const { width, height } = useWindowSize()
 const propsFlag = defineProps(['flag'])
-const flagRef = ref(propsFlag.value)
+const flagRef = ref(propsFlag.flag || false)
 const background = useTemplateRef('background')
 const backgroundSp = useTemplateRef('backgroundSp')
 const bgImage = useTemplateRef('bgImage')
@@ -23,33 +23,36 @@ watch(propsFlag, (newVal) => {
     flagRef.value = newVal;
     let showBgImage = bgImageVisibility.value ? bgImage : bgSpImage
     let showBackground = bgImageVisibility.value ? background : backgroundSp
-    showBackground.value.style.transition = bgImageVisibility.value ? 'transform 0.5s ease 0.2s' : 'transform 1s ease 0.2s'
-    const windowHeight = window.innerHeight
-    const imageHeight = showBgImage.value.clientHeight
-    const diff = imageHeight - windowHeight
-    showBackground.value.style.transform = `translateY(-${diff}px)`
+    if (showBackground.value) {
+      showBackground.value.style.transition = bgImageVisibility.value ? 'transform 0.5s ease 0.2s' : 'transform 1s ease 0.2s'
+      const windowHeight = window.innerHeight
+      const imageHeight = showBgImage.value ? showBgImage.value.clientHeight : 0
+      const diff = imageHeight - windowHeight
+      showBackground.value.style.transform = `translateY(-${diff}px)`
+    }
   }
 })
 
 watch(width, (newVal) => {
   const screenWidth = width.value
   isSP.value = screenWidth < breakPoint ? true : false
-
   if (flagRef.value?.flag) {
     let showBgImage = isSP.value ? bgSpImage : bgImage
     let showBackground = isSP.value ? backgroundSp : background
-    showBackground.value.style.transition = 'transform 0.5s ease 0.2s'
-    const windowHeight = window.innerHeight
-    const imageHeight = showBgImage.value.clientHeight
-    const diff = imageHeight - windowHeight
-    showBackground.value.style.transform = `translateY(-${diff}px)`
+    if (showBackground.value) {
+      showBackground.value.style.transition = 'transform 0.5s ease 0.2s'
+      const windowHeight = window.innerHeight
+      const imageHeight = showBgImage.value ? showBgImage.value.clientHeight : 0
+      const diff = imageHeight - windowHeight
+      showBackground.value.style.transform = `translateY(-${diff}px)`
+    }
   }
 })
 </script>
 
 <template>
   <div class="bg" ref="background">
-    <img :src="backgroundImage" alt="背景画像" class="" ref="bgImage"/>
+    <img :src="backgroundImage" alt="背景画像" :class="{start: flagRef}" ref="bgImage"/>
   </div>
   <div class="bg-sp" ref="backgroundSp">
     <img :src="backgroundSPImage" alt="背景画像" class="" ref="bgSpImage"/>
@@ -73,6 +76,12 @@ watch(width, (newVal) => {
     top: 0;
     bottom: auto;
     width: 100%;
+    filter: grayscale(1) brightness(0.5);
+    transition: filter 0.4s linear 0.4s;
+    &.start {
+      filter: grayscale(0) brightness(1);
+      transition: filter 0.4s linear 0.4s;
+    }
   }
 }
 .bg-sp {

@@ -1,21 +1,53 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted, watch, useTemplateRef } from 'vue'
+import Typewriter from 'typewriter-effect/dist/core'
 
 const $fadeOutRef = ref(false)
+const $string = ref(['START'])
+const typewriterElement = useTemplateRef('typewriterElement')
+let typewriter: Typewriter | null = null
+
 const fadeOut = () => {
   $fadeOutRef.value = true
 }
+
+onMounted(() => {
+  if (typewriterElement.value) {
+    typewriter = new Typewriter(typewriterElement.value, {
+      loop: false,
+      delay: 50,
+      deleteSpeed: Infinity,
+    })
+    typewriter.typeString($string.value[0]).start()
+  }
+})
+
+watch($string, (newVal) => {
+  if (typewriter && typewriterElement.value) {
+    typewriter.stop()
+    typewriterElement.value.textContent = ''
+    typewriter = new Typewriter(typewriterElement.value, {
+      loop: false,
+      delay: 50,
+      deleteSpeed: Infinity,
+    })
+    typewriter.typeString(newVal[0]).start()
+  }
+})
 </script>
 
 <template>
   <div
     class="starts"
     @click.passive="$emit('start-up'); fadeOut()"
-    :class="{fadeOut: $fadeOutRef}"
+    @mouseenter.passive="$string = ['TAP']"
+    @mouseleave.passive="$string = ['START']"
+    :class="{ fadeOut: $fadeOutRef }"
   >
     <div class="outline"></div>
     <div class="innerline">
-      <span>START</span>
+      <!-- vue-typewriter-effect の代わりに span を ref で取得 -->
+      <span ref="typewriterElement"></span>
     </div>
   </div>
 </template>
@@ -60,9 +92,21 @@ const fadeOut = () => {
     margin: auto;
     width: var.psd(240px);
     height: var.psd(240px);
-    border: 16px solid #FFF;
+    border: 1px solid #FFF;
     border-radius: 100%;
     box-sizing: content-box;
+    animation: wave 1s linear infinite;
+    box-shadow: 1px 1px 20px rgba(255, 255, 255, 0.5);
+    @keyframes wave {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.1);
+        opacity: 0;
+      }
+    }
     @include var.small {
       width: var.psd(184);
       height: var.psd(184);

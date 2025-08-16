@@ -18,7 +18,6 @@ const props = defineProps({
   select: Boolean,
   fullScreen: Boolean
 })
-console.log(props);
 
 const windowX = ref(0)
 const windowY = ref(0)
@@ -32,20 +31,23 @@ const resizable = ref(true)
 const breakPoint = 827
 const fullScreenFlag = ref(false)
 
-
 watch(width, (newVal) => {
   const screenWidth = width.value
   isSP.value = screenWidth < breakPoint ? true : false
 })
 watch(isSP, (newVal) => {
-  setDraggablSetting(props.type)
+  if (props.type) {
+    setDraggablSetting(props.type)
+  }
 })
 watch(() => props.fullScreen, (newVal) => {
   fullScreenFlag.value = newVal
 })
 
 onMounted(() => {
-  setDraggablSetting(props.type)
+  if (props.type) {
+    setDraggablSetting(props.type)
+  }
   const screenWidth = width.value
   isSP.value = screenWidth < breakPoint ? true : false
 })
@@ -69,10 +71,6 @@ const setDraggablSetting = (type: string) => {
 
 const fullScreen = (flag: boolean) => {
   fullScreenFlag.value = flag
-  console.log(props.type);
-  console.log(props.select);
-
-
   emit('emitShowFullScreen', flag)
 }
 
@@ -124,18 +122,20 @@ const onDragStartCallback = (callbackX, callbackY) => {
 @use '@/styles/_variable.scss' as var;
 
 .window {
-  border-radius: 20px;
+  border-radius: 0;
   position: absolute;
   width: 400px;
   height: 300px;
   box-shadow: 0 2px 15px 0 rgba(#FFFFFF, 10%);
   background: linear-gradient(135deg, rgba(#FFFFFF, 20%) 0%, rgba(#FFFFFF, 10%) 100%);
-  opacity: 0.5;
+  opacity: 0.2;
+  padding-bottom: 55px;
   @include var.small {
     width: 100%;
     height: auto;
     position: relative;
     opacity: 1;
+    padding-bottom: 0;
   }
   &:not(:first-of-type) {
     @include var.small {
@@ -189,8 +189,11 @@ const onDragStartCallback = (callbackX, callbackY) => {
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 20px;
-    border: 1px solid transparent;
+    border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+    border-left: 2px solid transparent;
+    border-right: 3px solid transparent;
     background: linear-gradient(135deg, rgba(#FFFFFF, 0.5) 0%, rgba(#FFFFFF, 0.1) 100%) border-box border-box;
     -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0) border-box;
     -webkit-mask-composite: destination-out;
@@ -198,8 +201,9 @@ const onDragStartCallback = (callbackX, callbackY) => {
     mask-composite: exclude;
   }
   .window-contents {
-    padding: 32px;
+    padding: 0;
     opacity: 1;
+    height: 100%;
     @include var.small {
       padding: 16px var.psd(16) calc(24px + 32px);
     }
@@ -214,7 +218,7 @@ const onDragStartCallback = (callbackX, callbackY) => {
     width: 100%;
     height: 55px;
     background: linear-gradient(135deg, rgba(#FFFFFF, 20%) 0%, rgba(#FFFFFF, 10%) 100%);
-    border-radius: 0 0 20px 20px;
+    border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -25,7 +25,7 @@ const reactiveStartUp = computed(() => {
           @start-up="startUp"
         />
       </template>
-      <template v-else="!$startUpShowRef">
+      <template v-else>
         <DesktopView />
       </template>
       <BackGround

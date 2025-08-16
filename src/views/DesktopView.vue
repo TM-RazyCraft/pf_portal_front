@@ -25,7 +25,7 @@ const focus = (type: string) => {
 const closeFullScreen = () => {
   parentFullScreenFlag.value = false
 }
-const selectTemplate = ((name) => {
+const selectTemplate = ((name: string) => {
   if (name === 'about') {
     return AboutTemplate
   } else if (name === 'gallery') {
@@ -78,20 +78,22 @@ const selectTemplate = ((name) => {
   bottom: 0;
   margin: auto;
   z-index: 2;
+  filter: sepia(0.4);
   @include var.small {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    filter: sepia(0);
   }
   .left-column {
-    width: 20.9%;
+    width: 14%;
     @include var.small {
       width: 100%;
       box-sizing: border-box;
     }
   }
   .right-column {
-    width: 79.1%;
+    width: 86%;
     background: linear-gradient(135deg, rgba(#323858, 20%) 0%, rgba(#A6423F, 10%) 100%);
     backdrop-filter: blur(10px);
     border-left: 1px solid;
