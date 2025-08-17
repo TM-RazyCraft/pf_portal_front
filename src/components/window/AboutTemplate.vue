@@ -7,17 +7,6 @@ const $titleString = ref(['About'])
 const $titleRef = useTemplateRef('title')
 const $bootstrapRef = useTemplateRef('bootstrap')
 
-const $frameworkString = ref(['React', 'Vue', 'Angular', 'NextJS', 'NuxtJS(技術検証)', 'AngularJS'])
-const frameworkRef = useTemplateRef('framework')
-const $bundleToolsString = ref(['Vite', 'Webpack', 'Parcel', 'Gulp', 'Grunt'])
-const bundleToolsRef = useTemplateRef('bundletools')
-const $uiFrameworkString = ref(['Ionic Framework', 'Shadcn/UI', 'Chakra UI', 'Angular Material', 'Bootstrap', 'OnsenUI'])
-const uiFrameworkRef = useTemplateRef('uiFramework')
-const $hybridAppString = ref(['Cordova', 'Capacitor', 'React Native(技術検証)'])
-const hybridAppRef = useTemplateRef('hybridApp')
-const $repositoryString = ref(['GitHub', 'GitLab', 'Bitbucket'])
-const repositoryRef = useTemplateRef('repository')
-
 onMounted(() => {
   if ($titleRef.value) {
     const titleTypeWriter = new Typewriter($titleRef.value, {
@@ -40,6 +29,7 @@ onMounted(() => {
       deleteSpeed: Infinity,
       cursor: '',
     })
+    bootstrapTypeWriter.pauseFor(1000)
     logLine(bootstrapTypeWriter, `session login date: ${currentTime.value}`, false)
     logLine(bootstrapTypeWriter, 'bootstrap', true)
     logLine(bootstrapTypeWriter, 'loading about page data', true)
@@ -48,93 +38,34 @@ onMounted(() => {
     logLine(bootstrapTypeWriter, 'directory check [OK]', false)
     logLine(bootstrapTypeWriter, 'compiling', true)
     logLine(bootstrapTypeWriter, 'complete', false)
+    bootstrapTypeWriter.changeDelay(1)
+    bootstrapTypeWriter.typeString('[Info] <br>')
+    bootstrapTypeWriter.typeString('[Info] <br>')
+    bootstrapTypeWriter.typeString('[Info] <br>')
+    logLine(bootstrapTypeWriter, 'ようこそ', true)
+    logLine(bootstrapTypeWriter, '詳細はview moreからご覧下さい。', false)
     bootstrapTypeWriter.start()
-  }
-  if (frameworkRef.value) {
-    const frameworkTypeWriter = new Typewriter(frameworkRef.value, {
-      strings: $frameworkString.value,
-      autoStart: false,
-      loop: false,
-      delay: 40,
-      deleteSpeed: Infinity,
-    })
-    frameworkTypeWriter
-      .pauseFor(1000)
-      .typeString($frameworkString.value.join(', '))
-      .start()
-  }
-  if (bundleToolsRef.value) {
-    const bundleToolsTypeWriter = new Typewriter(bundleToolsRef.value, {
-      strings: $bundleToolsString.value,
-      autoStart: false,
-      loop: false,
-      delay: 40,
-      deleteSpeed: Infinity,
-    })
-    bundleToolsTypeWriter
-      .pauseFor(1000)
-      .typeString($bundleToolsString.value.join(', '))
-      .start()
-  }
-  if (uiFrameworkRef.value) {
-    const uiFrameworkTypeWriter = new Typewriter(uiFrameworkRef.value, {
-      strings: $uiFrameworkString.value,
-      autoStart: false,
-      loop: false,
-      delay: 40,
-      deleteSpeed: Infinity,
-    })
-    uiFrameworkTypeWriter
-      .pauseFor(1000)
-      .typeString($uiFrameworkString.value.join(', '))
-      .start()
-  }
-  if (hybridAppRef.value) {
-    const hybridAppTypeWriter = new Typewriter(hybridAppRef.value, {
-      strings: $hybridAppString.value,
-      autoStart: false,
-      loop: false,
-      delay: 40,
-      deleteSpeed: Infinity,
-    })
-    hybridAppTypeWriter
-      .pauseFor(1000)
-      .typeString($hybridAppString.value.join(', '))
-      .start()
-  }
-  if (repositoryRef.value) {
-    const repositoryTypeWriter = new Typewriter(repositoryRef.value, {
-      strings: $repositoryString.value,
-      autoStart: false,
-      loop: false,
-      delay: 40,
-      deleteSpeed: Infinity,
-    })
-    repositoryTypeWriter
-      .pauseFor(1000)
-      .typeString($repositoryString.value.join(', '))
-      .start()
   }
 })
 const logLine = (writer: Typewriter, message: string, dot: Boolean = false) => {
   if (dot) {
     writer
-      .pauseFor(1000)
+      .pauseFor(100)
       .changeDelay(1)
       .typeString(`[Info] $ ${message}`)
-      .changeDelay(200)
+      .changeDelay(100)
       .typeString('.')
-      .pauseFor(200)
+      .pauseFor(100)
       .typeString('.')
-      .pauseFor(200)
+      .pauseFor(100)
       .typeString('.')
-      .pauseFor(200)
+      .pauseFor(100)
       .typeString('.')
       .typeString('<br>')
       .start()
   } else {
     writer
-    .pauseFor(1000)
+    .pauseFor(100)
     .changeDelay(1)
     .typeString(`[Info] $ ${message}`)
     .typeString('<br>')
@@ -149,23 +80,6 @@ const logLine = (writer: Typewriter, message: string, dot: Boolean = false) => {
     <p>
       <span ref="bootstrap"></span>
     </p>
-    <!-- <p>
-      <span ></span>
-      >経験フレームワーク
-      <span ref="framework"></span>
-      <br>
-      >バンドルツール・タスクランナー
-      <span ref="bundletools"></span>
-      <br>
-      >UIフレームワーク
-      <span ref="uiFramework"></span>
-      <br>
-      >ハイブリッドアプリ
-      <span ref="hybridApp"></span>
-      <br>
-      >Gitリポジトリホスティングサービス
-      <span ref="repository"></span>
-    </p> -->
   </div>
 </template>
 

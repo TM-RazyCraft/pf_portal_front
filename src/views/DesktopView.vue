@@ -6,24 +6,24 @@ import AboutTemplate from '@/components/window/AboutTemplate.vue';
 import AboutDetailTemplate from '@/components/window/AboutDetailTemplate.vue';
 import GalleryTemplate from '@/components/window/GalleryTemplate.vue';
 import GalleryDetailTemplate from '@/components/window/GalleryDetailTemplate.vue';
-const selectWindow = ref('about')
-const windowNames = ref(['about', 'gallery'])
-const selectDetailTemplate = ref(AboutDetailTemplate)
-const parentFullScreenFlag = ref(false)
-watch(selectWindow, (newVal) => {
+const $selectWindow = ref('about')
+const $windowNames = ref(['about', 'gallery'])
+const $selectDetailTemplate = ref(AboutDetailTemplate)
+const $parentFullScreenFlag = ref(false)
+watch($selectWindow, (newVal) => {
   if (newVal === 'about') {
-    selectDetailTemplate.value = AboutDetailTemplate
+    $selectDetailTemplate.value = AboutDetailTemplate
   } else if (newVal === 'gallery') {
-    selectDetailTemplate.value = GalleryDetailTemplate
+    $selectDetailTemplate.value = GalleryDetailTemplate
   }
 })
 
 const focus = (type: string) => {
-  selectWindow.value = type
+  $selectWindow.value = type
 }
 
 const closeFullScreen = () => {
-  parentFullScreenFlag.value = false
+  $parentFullScreenFlag.value = false
 }
 const selectTemplate = ((name: string) => {
   if (name === 'about') {
@@ -40,28 +40,28 @@ const selectTemplate = ((name: string) => {
       <DigitalClock />
     </div>
     <div class="right-column">
-      <template v-for="name in windowNames">
+      <template v-for="name in $windowNames">
         <Window
           :type="name"
-          :select="selectWindow === name"
-          :fullScreen="parentFullScreenFlag"
+          :select="$selectWindow === name"
+          :fullScreen="$parentFullScreenFlag"
           @click="focus(name)"
-          @emitSelectWindow="($event: any) => selectWindow = $event"
-          @emitShowFullScreen="($event: any) => parentFullScreenFlag = $event"
+          @emitSelectWindow="($event: any) => $selectWindow = $event"
+          @emitShowFullScreen="($event: any) => $parentFullScreenFlag = $event"
         >
           <component :is="selectTemplate(name)" />
         </Window>
       </template>
     </div>
-    <div class="fullscreen-contents" :class="{'nopadding': selectWindow === 'gallery'}" v-if="parentFullScreenFlag">
+    <div class="fullscreen-contents" :class="{'nopadding': $selectWindow === 'gallery'}" v-if="$parentFullScreenFlag">
       <div class="detail">
-        <component :is="selectDetailTemplate" />
+        <component :is="$selectDetailTemplate" />
         <div class="close" @click="closeFullScreen()">
           <img src="@/assets/images/parts/closeButton.svg" alt="閉じる">
         </div>
       </div>
     </div>
-    <div class="blur-filter" :class="{'show': parentFullScreenFlag}"></div>
+    <div class="blur-filter" :class="{'show': $parentFullScreenFlag}"></div>
   </div>
 </template>
 <style lang="scss" scoped>

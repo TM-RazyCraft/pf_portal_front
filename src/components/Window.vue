@@ -111,7 +111,7 @@ const onDragStartCallback = (callbackX, callbackY) => {
       <div class="window-contents">
         <slot></slot>
       </div>
-      <div class="window-footer" @click="fullScreen(true)">
+      <div class="window-footer" @click="fullScreen(true)" v-if="props.type === 'about'">
         <span>view more</span>
       </div>
     </Vue3DraggableResizable>
@@ -129,7 +129,7 @@ const onDragStartCallback = (callbackX, callbackY) => {
   box-shadow: 0 2px 15px 0 rgba(#FFFFFF, 10%);
   background: linear-gradient(135deg, rgba(#FFFFFF, 20%) 0%, rgba(#FFFFFF, 10%) 100%);
   opacity: 0.2;
-  padding-bottom: 55px;
+  padding-bottom: 40px;
   @include var.small {
     width: 100%;
     height: auto;
@@ -216,29 +216,35 @@ const onDragStartCallback = (callbackX, callbackY) => {
     right: 0;
     margin: auto;
     width: 100%;
-    height: 55px;
+    height: 40px;
     background: linear-gradient(135deg, rgba(#FFFFFF, 20%) 0%, rgba(#FFFFFF, 10%) 100%);
     border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     pointer-events: none;
+    overflow: hidden;
     @include var.small {
       height: 32px;
       pointer-events: auto;
     }
     &:hover {
       cursor: pointer;
+      span {
+        letter-spacing: 1.4px;
+        transition: all 0.2s ease 0s;
+      }
     }
     span {
       display: block;
-      font-size: var.psd(24px);
-      font-weight: 700;
+      font-size: var.psd(22px);
+      font-weight: 400;
       line-height: 1;
       text-align: center;
       color: #FFFFFF;
       position: relative;
       top: -4px;
+      transition: all 0.2s ease 0s;
       @include var.small {
         font-size: var.psd(16px);
         top: -2px;

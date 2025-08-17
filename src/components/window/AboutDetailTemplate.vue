@@ -1,35 +1,167 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useTemplateRef, onMounted } from 'vue'
+import Typewriter from 'typewriter-effect/dist/core'
+const $titleString = ref(['About'])
+const $titleRef = useTemplateRef('title')
+
+onMounted(() => {
+  if ($titleRef.value) {
+    const titleTypeWriter = new Typewriter($titleRef.value, {
+      strings: $titleString.value,
+      autoStart: false,
+      loop: false,
+      delay: 40,
+      deleteSpeed: Infinity,
+      cursor: ''
+    })
+    titleTypeWriter
+      .pauseFor(500)
+      .typeString($titleString.value.join(''))
+      .callFunction((event) => {
+        console.log(event);
+        event.elements.container.classList.add('complete')
+      })
+      .start()
+  }
+})
 </script>
 
 <template>
   <div class="inner">
-    <h1>about</h1>
-    <p>
-      texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext<br>
-      <br>
-      texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext<br>
-      <br>
-      texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-    </p>
-    <div class="white-glass-board">
-      <ul class="thumbs">
-        <li>
-          <img src="@/assets/images/about/sample_gray.png" alt="thumb1">
-        </li>
-        <li>
-          <img src="@/assets/images/about/sample_gray.png" alt="thumb1">
-        </li>
-      </ul>
+    <div class="title">
+      <h1 ref="title"></h1>
+      <div class="band"></div>
     </div>
-    <hr />
-    <p>
-      texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext<br>
-      <br>
-      texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext<br>
-      <br>
-      texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-    </p>
+    <div class="detail">
+      <p>
+        福岡市在住のフロント・ハイブリッドアプリエンジニア<br>
+        20代の頃グラフィックデザイナーの方に出会いクリエティブの仕事に興味を持ったのち、Googleのサービスに触れてそれまでの常識を覆したWebの技術にショックを受けフロントエンドエンジニアを志しました。<br>
+        その後、フロントエンドエンジニアとして活躍しながら現在はハイブリッドアプリの開発も行い開発から公開までフルスタックで活動しています。
+      </p>
+      <hr />
+      <h2>Web開発</h2>
+      <p>
+        フレームワークはReact, Vue, Angular, NextJS, AngularJS等全て対応可能です。<br>
+        UIフレームワークは案件に応じて、選定しています。
+      </p>
+      <div class="image-block">
+        <div class="white-glass-board">
+          <ul class="thumbs">
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/react.webp" alt="React">
+              </div>
+              <span>React</span>
+            </li>
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/vue.webp" alt="Vue">
+              </div>
+              <span>Vue</span>
+            </li>
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/angular.webp" alt="Angular">
+              </div>
+              <span>Angular</span>
+            </li>
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/angularjs.webp" alt="AngularJS">
+              </div>
+              <span>AngularJS</span>
+            </li>
+          </ul>
+        </div>
+        <div class="white-glass-board">
+          <ul class="thumbs">
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/ionic.webp" alt="Ionic Framework">
+              </div>
+              <span>Ionic Framework</span>
+            </li>
+            <li>
+              <div class="icon">
+                <div class="noimage">no<br>image</div>
+              </div>
+              <span>shadcn/ui</span>
+            </li>
+            <li>
+              <div class="icon">
+                <div class="noimage">no<br>image</div>
+              </div>
+              <span>Chakra UI</span>
+            </li>
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/angularmaterial.webp" alt="Angular Material">
+              </div>
+              <span>Angular Material</span>
+            </li>
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/bootstrap.webp" alt="Bootstrap">
+              </div>
+              <span>Bootstrap</span>
+            </li>
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/onsenui.webp" alt="Onsen UI">
+              </div>
+              <span>Onsen UI</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr />
+      <h2>ハイブリッドアプリ開発</h2>
+      <p>
+        主にCordova, Capacitorにて開発<br>
+        現在はExpoに興味がありReact Nativeへの切り替えを検討中です。<br>
+      </p>
+      <div class="image-block">
+
+        <div class="white-glass-board">
+          <ul class="thumbs">
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/cordova.webp" alt="Cordova">
+              </div>
+              <span>Cordova</span>
+            </li>
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/capacitor.webp" alt="Capacitor">
+              </div>
+              <span>Capacitor</span>
+            </li>
+          </ul>
+        </div>
+        <div class="white-glass-board">
+          <ul class="thumbs">
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/ionic.webp" alt="Ionic Framework">
+              </div>
+              <span>Ionic Framework</span>
+            </li>
+            <li>
+              <div class="icon">
+                <img src="@/assets/images/about/onsenui.webp" alt="Onsen UI">
+              </div>
+              <span>Onsen UI</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr />
+      <p>
+        ここまで閲覧頂きありがとうございます。<br>
+        少しでも興味を持って頂けましたら幸いです。<br>
+        よろしくお願い致します。
+      </p>
+    </div>
   </div>
 </template>
 
@@ -52,28 +184,71 @@ import { ref } from 'vue'
     padding: 0 var.psd(16) 64px;
   }
 }
-h1 {
-  font-size: var.psd(40px);
-  font-weight: 700;
-  line-height: 1.2;
-  color: #FFFFFF;
+.title {
   margin: 0 0 32px 0;
-  z-index: 1;
-  @include var.small {
-    font-size: var.psd(24);
-    margin: 0 0 16px 0;
+  position: relative;
+  h1 {
+    font-size: var.psd(40px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 2;
+    mix-blend-mode: difference;
+    &.complete {
+      +.band {
+        width: 200px;
+        transition: width 0.3s ease-in-out 0.1s;
+      }
+    }
+    @include var.small {
+      font-size: var.psd(24);
+      margin: 0 0 16px 0;
+    }
+  }
+  .band {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    margin: auto;
+    z-index: 1;
+    height: 100%;
+    width: 0;
+    background: #FFF;
+    transition: width 0.3s ease-in-out 0.1s;
   }
 }
-p {
+.detail {
+  padding-right: var.psd(32px);
+}
+h2 {
   font-size: var.psd(24px);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.2;
+  color: #FFFFFF;
+  word-break: break-all;
+  margin: 40px 0 24px 0;
+}
+p {
+  font-size: var.psd(16px);
+  font-weight: 400;
+  line-height: 1.6;
   color: #FFFFFF;
   word-break: break-all;
   margin: 0 0 24px 0;
   @include var.small {
     font-size: var.psd(24);
   }
+}
+.image-block {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 24px;
 }
 .white-glass-board {
   box-shadow: 0 2px 15px 0 rgba(#FFFFFF, 10%);
@@ -107,8 +282,8 @@ p {
   }
   .thumbs {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     margin: 0;
     padding: 0;
     @include var.small {
@@ -116,8 +291,12 @@ p {
     }
     li {
       list-style: none;
-      width: var.psd(401px);
+      width: var.psd(80px);
       margin-left: var.psd(32px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
       &:first-of-type {
         margin-left: 0;
         @include var.small {
@@ -129,9 +308,35 @@ p {
         margin-left: 0;
         margin-top: 16px;
       }
-      img {
-        width: 100%;
-        display: blok;
+      .icon {
+        width: var.psd(80px);
+        height: var.psd(80px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+        .noimage {
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          background: #DDD;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+      span {
+        display: block;
+        text-align: center;
+        font-size: var.psd(14px);
+        font-weight: 600;
+        color: #FFFFFF;
+        padding-top: 8px;
       }
     }
   }
