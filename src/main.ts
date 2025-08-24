@@ -1,21 +1,33 @@
+// Type declaration for Vite env variables
+// (Removed custom ImportMetaEnv and ImportMeta interfaces to use Vite's built-in types)
+
 import "./styles/main.scss";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
+
+interface ImportMetaEnv {
+  readonly VITE_HASH: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
 const moutApp = () => {
   const app = createApp(App);
   app.use(createPinia());
   app.use(router);
   app.mount("#app");
 }
-console.log(import.meta);
+console.log(import.meta.env.VITE_HASH);
 if (location.hostname === "localhost") {
   moutApp();
 } else {
+  const hash = import.meta.env.VITE_HASH;
   const password = prompt(`パスワードを入力してください:`);
-  if ( password !== "a74ece5f395175e8638e93dda00273167ffc6bd8015b99332c57cfa27cff4c54" ) {
+  if ( password !== hash ) {
     alert("パスワードが間違っています。");
     throw new Error("Invalid password");
   } else {
