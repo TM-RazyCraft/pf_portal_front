@@ -8,13 +8,6 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
-interface ImportMetaEnv {
-  readonly VITE_HASH: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
 const moutApp = () => {
   const app = createApp(App);
   app.use(createPinia());

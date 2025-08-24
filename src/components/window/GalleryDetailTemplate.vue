@@ -3,7 +3,7 @@ import { ref, useTemplateRef, onMounted, watch } from 'vue'
 import { useWindowSize  } from '@vueuse/core'
 
 const { width, height } = useWindowSize()
-const $selectGallery = ref(null)
+const $selectGallery = ref('')
 const $scrollerRef = useTemplateRef('scroller')
 const $isSP = ref(false)
 const $showDetail = ref(false)
@@ -14,21 +14,23 @@ watch(width, (newVal) => {
   $isSP.value = screenWidth < breakPoint ? true : false
 })
 
-const select = (event, name) => {
+const select = (event: any, name: string = '') => {
   console.log(name);
   if ($isSP.value) {
     $selectGallery.value = name
     $showDetail.value = true
   } else {
     $selectGallery.value = name
-    $scrollerRef.value.scrollTo({ top: 0, behavior: 'smooth' })
+    if ($scrollerRef.value) {
+      $scrollerRef.value.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 }
 
 onMounted(() => {
   const screenWidth = width.value
   $isSP.value = screenWidth < breakPoint ? true : false
-  $selectGallery.value = $isSP.value ? null : 'gallery1'
+  $selectGallery.value = $isSP.value ? '' : 'gallery1'
 })
 
 </script>

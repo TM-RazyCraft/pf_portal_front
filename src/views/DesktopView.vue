@@ -8,7 +8,7 @@ import GalleryTemplate from '@/components/window/GalleryTemplate.vue';
 import GalleryDetailTemplate from '@/components/window/GalleryDetailTemplate.vue';
 const $selectWindow = ref('about')
 const $windowNames = ref(['about', 'gallery'])
-const $selectDetailTemplate = ref(AboutDetailTemplate)
+const $selectDetailTemplate: any = ref(AboutDetailTemplate)
 const $parentFullScreenFlag = ref(false)
 watch($selectWindow, (newVal) => {
   if (newVal === 'about') {

@@ -74,7 +74,7 @@ const fullScreen = (flag: boolean) => {
   emit('emitShowFullScreen', flag)
 }
 
-const onDragStartCallback = (callbackX, callbackY) => {
+const onDragStartCallback = (callbackX: string, callbackY: string) => {
   fullScreenFlag.value = false
   emit('emitSelectWindow', props.type)
   emit('emitShowFullScreen', false)
