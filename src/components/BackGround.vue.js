@@ -47,6 +47,7 @@ debugger; /* PartiallyEnd: #3632/scriptSetup.vue */
 const __VLS_ctx = {};
 let __VLS_components;
 let __VLS_directives;
+/** @type {__VLS_StyleScopedClasses['start']} */ ;
 // CSS variable injection 
 // CSS variable injection end 
 __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
@@ -69,14 +70,14 @@ __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.d
 __VLS_asFunctionalElement(__VLS_intrinsicElements.img)({
     src: (__VLS_ctx.backgroundSPImage),
     alt: "背景画像",
-    ...{ class: "" },
+    ...{ class: ({ start: __VLS_ctx.flagRef }) },
     ref: "bgSpImage",
 });
 /** @type {typeof __VLS_ctx.bgSpImage} */ ;
-/** @type {__VLS_StyleScopedClasses['']} */ ;
 /** @type {__VLS_StyleScopedClasses['bg']} */ ;
 /** @type {__VLS_StyleScopedClasses['start']} */ ;
 /** @type {__VLS_StyleScopedClasses['bg-sp']} */ ;
+/** @type {__VLS_StyleScopedClasses['start']} */ ;
 var __VLS_dollars;
 const __VLS_self = (await import('vue')).defineComponent({
     setup() {

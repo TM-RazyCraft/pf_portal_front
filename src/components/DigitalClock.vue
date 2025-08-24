@@ -5,7 +5,9 @@ import dayjs from 'dayjs'
 const nowHour = ref(dayjs().format('HH'))
 const nowMinute = ref(dayjs().format('mm'))
 const date = ref(dayjs().format('YYYY/MM/DD'))
-
+/**
+ * 現在時刻を1秒ごとに更新します
+ */
 const updateTime = () => {
   setInterval(() => {
     nowHour.value = dayjs().format('HH')

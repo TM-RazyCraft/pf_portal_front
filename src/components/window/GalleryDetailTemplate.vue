@@ -8,14 +8,24 @@ const $scrollerRef = useTemplateRef('scroller')
 const $isSP = ref(false)
 const $showDetail = ref(false)
 const breakPoint = 827
-
+/**
+ * 画面サイズを監視します
+ */
 watch(width, (newVal) => {
   const screenWidth = width.value
   $isSP.value = screenWidth < breakPoint ? true : false
 })
-
+onMounted(() => {
+  const screenWidth = width.value
+  $isSP.value = screenWidth < breakPoint ? true : false
+  $selectGallery.value = $isSP.value ? '' : 'gallery1'
+})
+/**
+ * ギャラリーを選択します
+ * @param event Event
+ * @param name 選択するギャラリー名
+ */
 const select = (event: any, name: string = '') => {
-  console.log(name);
   if ($isSP.value) {
     $selectGallery.value = name
     $showDetail.value = true
@@ -26,13 +36,6 @@ const select = (event: any, name: string = '') => {
     }
   }
 }
-
-onMounted(() => {
-  const screenWidth = width.value
-  $isSP.value = screenWidth < breakPoint ? true : false
-  $selectGallery.value = $isSP.value ? '' : 'gallery1'
-})
-
 </script>
 
 <template>

@@ -6,7 +6,6 @@ const currentTime = ref(dayjs().format('YYYY/MM/DD HH:mm:ss').toString())
 const $titleString = ref(['Gallery'])
 const $titleRef = useTemplateRef('title')
 const $bootstrapRef = useTemplateRef('bootstrap')
-
 onMounted(() => {
   if ($titleRef.value) {
     const titleTypeWriter = new Typewriter($titleRef.value, {
@@ -48,6 +47,12 @@ onMounted(() => {
     bootstrapTypeWriter.start()
   }
 });
+/**
+ * ログをタイプライターで表示します
+ * @param writer Typewriterインスタンス
+ * @param message メッセージ
+ * @param dot ドットアニメーションを表示するかどうか
+ */
 const logLine = (writer: Typewriter, message: string, dot: Boolean = false) => {
   if (dot) {
     writer
@@ -118,6 +123,7 @@ p {
   }
   @include var.small {
     font-size: var.psd(16px);
+    padding: 0;
   }
 }
 </style>

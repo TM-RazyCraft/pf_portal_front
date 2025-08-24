@@ -204,6 +204,12 @@ onMounted(() => {
     @include var.small {
       font-size: var.psd(24);
       margin: 0 0 16px 0;
+      &.complete {
+        +.band {
+          width: 80%;
+          transition: width 0.3s ease-in-out 0.1s;
+        }
+      }
     }
   }
   .band {
@@ -223,6 +229,9 @@ onMounted(() => {
 }
 .detail {
   padding-right: var.psd(32px);
+  @include var.small {
+    padding-right: var.psd(16);
+  }
 }
 h2 {
   font-size: var.psd(24px);
@@ -231,6 +240,10 @@ h2 {
   color: #FFFFFF;
   word-break: break-all;
   margin: 40px 0 24px 0;
+  @include var.small {
+    font-size: var.psd(24);
+    margin: 24px 0 16px 0;
+  }
 }
 p {
   font-size: var.psd(16px);
@@ -241,6 +254,9 @@ p {
   margin: 0 0 24px 0;
   @include var.small {
     font-size: var.psd(24);
+    @include var.small {
+      font-size: var.psd(16);
+    }
   }
 }
 .image-block {
@@ -249,6 +265,9 @@ p {
   align-items: flex-start;
   flex-direction: column;
   gap: 24px;
+  @include var.small {
+    gap: var.psd(24);
+  }
 }
 .white-glass-board {
   box-shadow: 0 2px 15px 0 rgba(#FFFFFF, 10%);
@@ -261,6 +280,9 @@ p {
   left: 2px;
   max-width: calc(100% - 2px);
   display: inline-block;
+  @include var.small {
+    padding: 24px var.psd(24);
+  }
   &:before {
     content: "";
     position: absolute;
@@ -287,26 +309,26 @@ p {
     margin: 0;
     padding: 0;
     @include var.small {
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: var.psd(16);
+      flex-wrap: wrap;
     }
     li {
       list-style: none;
       width: var.psd(80px);
       margin-left: var.psd(32px);
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       flex-direction: column;
       &:first-of-type {
         margin-left: 0;
-        @include var.small {
-          margin-top: 0;
-        }
       }
       @include var.small {
         width: 100%;
         margin-left: 0;
-        margin-top: 16px;
+        width: var.psd(80);
       }
       .icon {
         width: var.psd(80px);
@@ -314,6 +336,10 @@ p {
         display: flex;
         justify-content: center;
         align-items: center;
+        @include var.small {
+          width: var.psd(80);
+          height: var.psd(80);
+        }
         img {
           display: block;
           width: 100%;

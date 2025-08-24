@@ -1,3 +1,4 @@
+@use '@/styles/_variable.scss' as var;
 * {
   font-family: "Zen Kaku Gothic New", "Inter", sans-serif;
   font-feature-settings: "palt";
@@ -8,6 +9,9 @@ html {
 body {
   overflow: hidden;
   background: #000;
+  @include var.small {
+    overflow: hidden;
+  }
 }
 #app {
   overflow: hidden;

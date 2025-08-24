@@ -91,15 +91,19 @@ if (__VLS_ctx.isSP) {
         ...{ class: "window-contents" },
     });
     var __VLS_0 = {};
-    __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
-        ...{ onClick: (...[$event]) => {
-                if (!(__VLS_ctx.isSP))
-                    return;
-                __VLS_ctx.fullScreen(true);
-            } },
-        ...{ class: "window-footer" },
-    });
-    __VLS_asFunctionalElement(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({});
+    if (props.type === 'about') {
+        __VLS_asFunctionalElement(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({
+            ...{ onClick: (...[$event]) => {
+                    if (!(__VLS_ctx.isSP))
+                        return;
+                    if (!(props.type === 'about'))
+                        return;
+                    __VLS_ctx.fullScreen(true);
+                } },
+            ...{ class: "window-footer" },
+        });
+        __VLS_asFunctionalElement(__VLS_intrinsicElements.span, __VLS_intrinsicElements.span)({});
+    }
 }
 else {
     const __VLS_2 = {}.Vue3DraggableResizable;

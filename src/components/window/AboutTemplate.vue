@@ -47,6 +47,12 @@ onMounted(() => {
     bootstrapTypeWriter.start()
   }
 })
+/**
+ * ログをタイプライターで表示します
+ * @param writer Typewriterインスタンス
+ * @param message メッセージ
+ * @param dot ドットアニメーションを表示するかどうか
+ */
 const logLine = (writer: Typewriter, message: string, dot: Boolean = false) => {
   if (dot) {
     writer
@@ -121,6 +127,7 @@ p {
   }
   @include var.small {
     font-size: var.psd(16px);
+    padding: 0;
   }
 }
 </style>

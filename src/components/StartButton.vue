@@ -6,11 +6,6 @@ const $fadeOutRef = ref(false)
 const $string = ref(['START'])
 const typewriterElement = useTemplateRef('typewriterElement')
 let typewriter: Typewriter | null = null
-
-const fadeOut = () => {
-  $fadeOutRef.value = true
-}
-
 onMounted(() => {
   if (typewriterElement.value) {
     typewriter = new Typewriter(typewriterElement.value, {
@@ -21,7 +16,9 @@ onMounted(() => {
     typewriter.typeString($string.value[0]).start()
   }
 })
-
+/**
+ * 文字列が変更されたときにタイプライターを更新します
+ */
 watch($string, (newVal) => {
   if (typewriter && typewriterElement.value) {
     typewriter.stop()
@@ -34,6 +31,12 @@ watch($string, (newVal) => {
     typewriter.typeString(newVal[0]).start()
   }
 })
+/**
+ * フェードアウトアニメーションを開始します
+ */
+const fadeOut = () => {
+  $fadeOutRef.value = true
+}
 </script>
 
 <template>

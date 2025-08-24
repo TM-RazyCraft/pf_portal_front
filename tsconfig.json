@@ -16,7 +16,6 @@
     "moduleResolution": "node",
     "module": "esnext",
     "jsx": "preserve",
-    "baseUrl": ".",
-    "skipLibCheck": true
+    "baseUrl": "."
   }
 }

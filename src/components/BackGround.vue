@@ -7,20 +7,21 @@ import { useWindowSize  } from '@vueuse/core'
 
 const { width, height } = useWindowSize()
 const propsFlag = defineProps(['flag'])
-const flagRef = ref(propsFlag.flag || false)
+const $flagRef = ref(propsFlag.flag || false)
 const background = useTemplateRef('background')
 const backgroundSp = useTemplateRef('backgroundSp')
 const bgImage = useTemplateRef('bgImage')
 const bgSpImage = useTemplateRef('bgSpImage')
 const bgImageVisibility = useElementVisibility(bgImage)
 const bgSpImageVisibility = useElementVisibility(bgSpImage)
-
 const isSP = ref(false)
 const breakPoint = 827
-
+/**
+ * STARTボタンの押下を監視します
+ */
 watch(propsFlag, (newVal) => {
   if (newVal) {
-    flagRef.value = newVal;
+    $flagRef.value = newVal;
     let showBgImage = bgImageVisibility.value ? bgImage : bgSpImage
     let showBackground = bgImageVisibility.value ? background : backgroundSp
     if (showBackground.value) {
@@ -32,11 +33,13 @@ watch(propsFlag, (newVal) => {
     }
   }
 })
-
-watch(width, (newVal) => {
+/**
+ * 画面サイズを監視します
+ */
+watch(width, (newVal: number) => {
   const screenWidth = width.value
   isSP.value = screenWidth < breakPoint ? true : false
-  if (flagRef.value?.flag) {
+  if ($flagRef.value?.flag) {
     let showBgImage = isSP.value ? bgSpImage : bgImage
     let showBackground = isSP.value ? backgroundSp : background
     if (showBackground.value) {
@@ -52,10 +55,10 @@ watch(width, (newVal) => {
 
 <template>
   <div class="bg" ref="background">
-    <img :src="backgroundImage" alt="背景画像" :class="{start: flagRef}" ref="bgImage"/>
+    <img :src="backgroundImage" alt="背景画像" :class="{start: $flagRef}" ref="bgImage"/>
   </div>
   <div class="bg-sp" ref="backgroundSp">
-    <img :src="backgroundSPImage" alt="背景画像" class="" ref="bgSpImage"/>
+    <img :src="backgroundSPImage" alt="背景画像" :class="{start: $flagRef}" ref="bgSpImage"/>
   </div>
 </template>
 
@@ -102,6 +105,12 @@ watch(width, (newVal) => {
     width: auto;
     height: 122.7%;
     object-fit: cover;
+    filter: grayscale(1) brightness(0.5);
+    transition: filter 0.4s linear 0.4s;
+    &.start {
+      filter: grayscale(0) brightness(1);
+      transition: filter 0.4s linear 0.4s;
+    }
   }
 }
 </style>

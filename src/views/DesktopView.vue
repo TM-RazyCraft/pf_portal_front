@@ -10,11 +10,17 @@ const $selectWindow = ref('about')
 const $windowNames = ref(['about', 'gallery'])
 const $selectDetailTemplate: any = ref(AboutDetailTemplate)
 const $parentFullScreenFlag = ref(false)
+const wrapper = ref<HTMLElement | null>(null)
 watch($selectWindow, (newVal) => {
   if (newVal === 'about') {
     $selectDetailTemplate.value = AboutDetailTemplate
   } else if (newVal === 'gallery') {
     $selectDetailTemplate.value = GalleryDetailTemplate
+  }
+})
+watch($parentFullScreenFlag, (newVal: boolean) => {
+  if (newVal) {
+    wrapper.value?.scrollTo(0, 0)
   }
 })
 
@@ -35,7 +41,7 @@ const selectTemplate = ((name: string) => {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :class="{'fullscreen': $parentFullScreenFlag}" ref="wrapper">
     <div class="left-column">
       <DigitalClock />
     </div>
@@ -84,6 +90,12 @@ const selectTemplate = ((name: string) => {
     justify-content: flex-start;
     align-items: center;
     filter: sepia(0);
+    overflow: auto;
+  }
+  &.fullscreen {
+    @include var.small {
+      overflow: hidden;
+    }
   }
   .left-column {
     width: 14%;
@@ -134,7 +146,8 @@ const selectTemplate = ((name: string) => {
     }
   }
   .fullscreen-contents {
-    position: absolute;
+    position: fixed;
+    top: 0;
     z-index: 2;
     padding: 80px 0 0 20.9%;
     width: calc(100vw - 20.9%);
@@ -142,6 +155,7 @@ const selectTemplate = ((name: string) => {
       padding: 48px 0 32px;
       width: 100vw;
       box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.5);
     }
     &.nopadding {
       padding: 0 0 0 20.9%;

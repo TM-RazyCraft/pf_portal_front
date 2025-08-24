@@ -14,7 +14,6 @@ const moutApp = () => {
   app.use(router);
   app.mount("#app");
 }
-console.log(import.meta.env.VITE_HASH);
 if (location.hostname === "localhost") {
   moutApp();
 } else {

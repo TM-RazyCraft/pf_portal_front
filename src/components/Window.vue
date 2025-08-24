@@ -30,17 +30,25 @@ const draggable = ref(true)
 const resizable = ref(true)
 const breakPoint = 827
 const fullScreenFlag = ref(false)
-
-watch(width, (newVal) => {
+/**
+ * 画面サイズを監視します
+ */
+watch(width, (newVal: any) => {
   const screenWidth = width.value
   isSP.value = screenWidth < breakPoint ? true : false
 })
-watch(isSP, (newVal) => {
+/**
+ * SP表示を監視します
+ */
+watch(isSP, (newVal: any) => {
   if (props.type) {
     setDraggablSetting(props.type)
   }
 })
-watch(() => props.fullScreen, (newVal) => {
+/**
+ * フルスクリーン表示を監視します
+ */
+watch(() => props.fullScreen, (newVal: any) => {
   fullScreenFlag.value = newVal
 })
 
@@ -51,7 +59,10 @@ onMounted(() => {
   const screenWidth = width.value
   isSP.value = screenWidth < breakPoint ? true : false
 })
-
+/**
+ * ドラッグ可能な設定を行います
+ * @param type Window名
+ */
 const setDraggablSetting = (type: string) => {
   switch (type) {
     case 'about':
@@ -68,12 +79,19 @@ const setDraggablSetting = (type: string) => {
       break
   }
 }
-
+/**
+ * フルスクリーン表示を切り替えます
+ * @param flag フルスクリーンフラグ
+ */
 const fullScreen = (flag: boolean) => {
   fullScreenFlag.value = flag
   emit('emitShowFullScreen', flag)
 }
-
+/**
+ * ドラッグ開始時のコールバック
+ * @param callbackX X座標
+ * @param callbackY Y座標
+ */
 const onDragStartCallback = (callbackX: string, callbackY: string) => {
   fullScreenFlag.value = false
   emit('emitSelectWindow', props.type)
@@ -87,7 +105,7 @@ const onDragStartCallback = (callbackX: string, callbackY: string) => {
       <div class="window-contents">
         <slot></slot>
       </div>
-      <div class="window-footer" @click="fullScreen(true)">
+      <div class="window-footer" @click="fullScreen(true)" v-if="props.type === 'about'">
         <span>view more</span>
       </div>
     </div>
@@ -169,6 +187,10 @@ const onDragStartCallback = (callbackX: string, callbackY: string) => {
     box-shadow: none;
     z-index: 99;
     transition: all 0.1s ease 0.1s;
+    @include var.small {
+      left: 0 !important;
+      overflow: hidden;
+    }
     .window-contents {
       opacity: 0;
       transition: all 0.2s ease 0s;
