@@ -30,7 +30,7 @@ jobs:
           node-version: "20.12.2"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Build project
         run: yarn build
